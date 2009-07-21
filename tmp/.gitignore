@@ -1,0 +1,6 @@
+*
+!.gitignore
+!cache
+!pids
+!sessions
+!sockets
