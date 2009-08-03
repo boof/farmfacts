@@ -1,2 +1,13 @@
-FarmFacts 2.0 / Booya
-=====================
+FarmFacts 2.0 - Codename "Booya"
+================================
+
+Features:
+---------
+
+- Robust Setup with Rails 2+, Apache 2+ and Passenger 2+
+- Language-Negotiation (I18n par excellence)
+- Git based Versioning
+- Git based Distribution
+- XBEL (XML Bookmark Exchange Language) based Navigation
+- jQuery based state-of-the-art user interface
+- role based authorization
