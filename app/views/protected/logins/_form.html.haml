@@ -1,0 +1,22 @@
+.ui-helper-clearfix
+  %div{ :style => 'float: left; margin: 0 .5em;' }
+    = f.label :first_name, t('activerecord.attributes.login.first_name')
+    %div= f.text_field :first_name
+  %div{ :style => 'float: left; margin: 0 .5em;' }
+    = f.label :last_name, t('activerecord.attributes.login.last_name')
+    %div= f.text_field :last_name
+.ui-helper-clearfix
+  %div{ :style => 'float: left; margin: 0 .5em;' }
+    = f.label :email, t('activerecord.attributes.login.email')
+    %div= f.text_field :email
+.ui-helper-clearfix
+  %div{ :style => 'float: left; margin: 0 .5em;' }
+    = f.label :username, t('activerecord.attributes.login.username')
+    %div= f.text_field :username
+.ui-helper-clearfix
+  %div{ :style => 'float: left; margin: 0 .5em;' }
+    = f.label :password, t('activerecord.attributes.login.password')
+    %div= f.password_field :password
+  %div{ :style => 'float: left; margin: 0 .5em;' }
+    = f.label :password_confirmation, t('activerecord.attributes.login.password_confirmation')
+    %div= f.password_field :password_confirmation

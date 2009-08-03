@@ -1,0 +1,2 @@
+class LeadingRole < BelongingRole
+end

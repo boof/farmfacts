@@ -1,0 +1,15 @@
+%div{ :style => 'margin: 1em auto; width: 560px;' }
+  .ui-widget
+    .ui-widget-header.ui-corner-top{ :style => 'padding: 2px 1em;' }= t 'actions.protected.logins.new'
+    .ui-widget-content{ :style => 'padding: 4px 1em;' }
+      - form_for [:protected, @login] do |f|
+        = render 'form', :f => f
+
+        %p{ :style => 'padding-right: .5em; text-align: right;' }
+          %a.submit.ui-state-default.ui-corner-all{ :style => 'padding: 0.4em 1em 0.4em 20px; position: relative; text-decoration: none;' }
+            %span.ui-icon.ui-icon-disk{ :style => 'left: 0.2em; margin: -8px 5px 0 0; position: absolute; top:50%;' }
+            = t 'actions.protected.logins.create'
+          &nbsp;
+          %a.cancel.ui-state-default.ui-corner-all{ :style => 'padding: 0.4em 1em 0.4em 20px; position: relative; text-decoration: none;', :href => return_uri }
+            %span.ui-icon.ui-icon-cancel{ :style => 'left: 0.2em; margin: -8px 5px 0 0; position: absolute; top:50%;' }
+            = t 'actions.cancel'

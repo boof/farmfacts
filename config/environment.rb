@@ -5,10 +5,10 @@ Rails::Initializer.run do |config|
   # Add additional load paths for your own custom dirs
   # config.load_paths += %W( #{RAILS_ROOT}/extras )
 
-  config.gem "nokogiri"
-  config.gem "grit"
-  config.gem "haml"
-  config.gem "sqlite3-ruby", :lib => "sqlite3"
+  config.gem 'nokogiri'
+  config.gem 'grit'
+  config.gem 'haml'
+  config.gem 'sqlite3-ruby', :lib => 'sqlite3'
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
@@ -26,4 +26,12 @@ Rails::Initializer.run do |config|
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
+
+  config.action_view.field_error_proc = proc { |html, context|
+      case html
+      when /label/; %Q'<span class="ui-state-error-text">#{ html }</span>'
+      else
+        html
+      end
+      }
 end

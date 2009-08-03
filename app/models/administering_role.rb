@@ -1,0 +1,2 @@
+class AdministeringRole < Role
+end
