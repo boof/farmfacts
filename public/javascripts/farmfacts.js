@@ -16,11 +16,10 @@ var TitleBar = {
 		$(TitleBar.menus).each(function() { this.hide(); });
 	},
 	deactivate: function() {
-		$(TitleBar.menus).each(function() { this.deactivate(); });
 		$(document).unbind('click', this.close);
+		$(TitleBar.menus).each(function() { this.deactivate(); });
 	},
 	container: null,
-	isActive: false,
 
 	Menu: function(anchor) {
 		this.label = $(anchor);
@@ -61,7 +60,11 @@ var TitleBar = {
 		anchor.menu = this;
 	},
 	initialize: function(query) {
-		this.container = $(query).addClass('ui-helper-clearfix');
+		this.container = $(query).css({
+			position: 'fixed',
+			top: 0,
+			width: '98%'
+		});
 		$("li a[href^='#']", this.container)
 			.each(function() { new TitleBar.Menu(this); });
 	}
@@ -78,7 +81,7 @@ var FarmFacts = {
 	},
 
 	initialize_titlebar: function() {
-      $(function() { TitleBar.initialize('#top'); });
+		$(function() { TitleBar.initialize('#top'); });
 	},
 
 	start_clock: function() {
@@ -118,7 +121,6 @@ var FarmFacts = {
 			},
 			cache: true
 		});
-
 	},
 
 	enhance_buttons: function() {
@@ -137,7 +139,7 @@ var FarmFacts = {
 					function() { $(this).addClass('ui-state-hover'); },
 					function() { $(this).removeClass('ui-state-hover'); }
 				)
-				.click(function() { $(this).click(); });
+				.click(function() { window.location = this.href; });
 		});
 	},
 

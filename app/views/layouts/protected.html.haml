@@ -21,8 +21,9 @@
 
       %ul.right
         %li
-          .label= visitor.name
+          .label= "#{ visitor.username } (#{ visitor.name })"
         %li
           .label.clock &nbsp;
 
-    = yield
+    .content
+      = yield

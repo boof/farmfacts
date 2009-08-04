@@ -4,6 +4,7 @@ de:
     groups: 'Gruppenverwaltung'
     default: 'FarmFacts 2.0'
   actions:
+    back: Zurück
     quit: Beenden
     print: Seite drucken
     cancel: Aktion abbrechen
@@ -16,9 +17,11 @@ de:
         index: 'Gruppenverwaltung'
       logins:
         index: 'Benutzer'
+        show: 'Benutzer {{name}} anzeigen'
         new: 'Neuen Benutzer anlegen'
         create: 'Benutzer erstellen'
-        show: 'Benutzer {{name}} anzeigen'
+        edit: 'Benutzer {{name}} bearbeiten'
+        update: 'Benutzer aktualisieren'
 
   activerecord:
     errors:

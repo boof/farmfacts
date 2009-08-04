@@ -1,0 +1,16 @@
+%div{ :style => 'margin: 1em auto; width: 80%;' }
+  .ui-widget
+    .ui-widget-header.ui-corner-top{ :style => 'border: none; padding: 2px 1em; font-weight: normal;' }= t 'actions.protected.logins.index'
+    .ui-widget-content{ :style => 'padding: 4px 1em;' }
+      %table#logins{ :style => 'width: 100%;' }
+        %thead
+          %tr
+            %td.name
+              = "#{ t 'activerecord.attributes.login.last_name' },"
+              = t 'activerecord.attributes.login.first_name'
+            %td.username
+              = t 'activerecord.attributes.login.username'
+            %td.email
+              = t 'activerecord.attributes.login.email'
+        %tbody
+          = render @logins

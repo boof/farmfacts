@@ -1,0 +1,4 @@
+- content_tag_for :tr, login do
+  %td= link_to "#{ login.last_name }, #{ login.first_name }", edit_protected_login_path(login, :return_uri => request.request_uri), :title => t('actions.protected.logins.edit', :name => login.name)
+  %td= login.username
+  %td= mail_to login.email

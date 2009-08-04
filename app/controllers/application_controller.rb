@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base; protected
     namespace = namespace.map { |n| n.to_s } * '.'
     namespace = 'titles' if namespace.blank?
 
-    @title = translate :"#{ namespace }.#{ title }", *options
+    @title = translate :"#{ namespace }.#{ title }", options
   end
   def title
     @title ||= translate :'titles.default'
