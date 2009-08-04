@@ -22,7 +22,7 @@ class LoginsController < ApplicationController
   layout :choose_layout
 
   def show
-    set_title 'logins.show'
+    set_title 'logins.show', :actions
   end
 
   def edit
