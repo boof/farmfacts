@@ -1,0 +1,5 @@
+en:
+  titles:
+    logins: 'Usermanagement'
+    groups: 'Groupmanagement'
+    default: 'FarmFacts 2.0'

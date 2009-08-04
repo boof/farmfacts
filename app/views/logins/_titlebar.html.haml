@@ -1,0 +1,13 @@
+%li
+  - link_to '#current' do
+    .bold.label= t 'titles.default'
+%li#current.hidden
+  %ul
+    %li= link_to t('actions.logins.forget'), destroy_login_path
+%li
+  - link_to '#dashboard' do
+    .label= title
+%li#dashboard.hidden
+  %ul
+    %li= link_to t('actions.protected.logins.index'), protected_logins_path(:return_uri => request.request_uri)
+    %li= link_to t('actions.print'), 'javascript: window.print();'

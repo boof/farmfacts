@@ -18,4 +18,6 @@ task :bootstrap do
   Rake::Task['gems:build'].invoke
   Rake::Task['db:create'].invoke
   Rake::Task['db:migrate'].invoke
+
+  puts 'Start the application and point your browser to HOSTNAME/protected/setup.'
 end
