@@ -1,17 +1,14 @@
-%div{ :style => 'margin: 1em auto; width: 560px;' }
-  .ui-widget
-    .ui-widget-header.ui-corner-top{ :style => 'border: none; padding: 2px 1em; font-weight: normal;' }= t 'actions.protected.logins.new'
-    .ui-widget-content{ :style => 'padding: 4px 1em;' }
-      - form_for [:protected, @login] do |f|
-        = render 'form', :f => f
+.ui-widget{ :style => 'min-width: 640px; width: 80%;' }
+  .ui-widget-header.ui-corner-top{ :style => 'padding: 3px 1em; font-weight: normal;' }= t 'actions.protected.logins.new'
+  .ui-widget-content{ :style => 'padding: 4px 1em;' }
+    - form_for [:protected, @login] do |f|
+      = render 'form', :f => f
 
-        %div &nbsp;
-
-        %p{ :style => 'padding-right: .5em; text-align: right;' }
-          %a.submit
-            %span.ui-icon.ui-icon-disk{ :style => 'left: 0.2em; margin: -8px 5px 0 0; position: absolute; top:50%;' }
-            = t 'actions.protected.logins.create'
-          &nbsp;
-          %a.cancel{ :style => 'padding: 0.4em 1em 0.4em 20px; position: relative; text-decoration: none;', :href => return_uri }
-            %span.ui-icon.ui-icon-cancel{ :style => 'left: 0.2em; margin: -8px 5px 0 0; position: absolute; top:50%;' }
-            = t 'actions.cancel'
+%p
+  %a.submit{ :style => 'padding: 0.4em 1em 0.4em 20px; position: relative; text-decoration: none;' }
+    %span.ui-icon.ui-icon-disk{ :style => 'left: 0.2em; margin: -8px 5px 0 0; position: absolute; top:50%;' }
+    = t 'actions.protected.logins.create'
+  &nbsp;
+  %a.button{ :style => 'padding: 0.4em 1em 0.4em 20px; position: relative; text-decoration: none;', :href => return_uri }
+    %span.ui-icon.ui-icon-cancel{ :style => 'left: 0.2em; margin: -8px 5px 0 0; position: absolute; top:50%;' }
+    = t 'actions.cancel'

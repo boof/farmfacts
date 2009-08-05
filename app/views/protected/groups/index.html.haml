@@ -1,26 +1,21 @@
 %div{ :style => 'min-width: 640px; width: 80%;' }
   .ui-widget
     .ui-widget-header.ui-corner-top{ :style => 'border: none; padding: 2px 1em; font-weight: normal;' }
-      = t 'actions.protected.logins.index'
+      = t 'actions.protected.groups.index'
     .ui-widget-content{ :style => 'padding: 4px 1em;' }
       %pagination
         &nbsp;
         // Tabs loading content via AJAX?
-      %table#logins.ui-helper-reset
+      %table#groups.ui-helper-reset
         %thead
           %tr
             %th.name
-              = "#{ t 'activerecord.attributes.login.last_name' },"
-              = t 'activerecord.attributes.login.first_name'
-            %th.username
-              = t 'activerecord.attributes.login.username'
-            %th.email
-              = t 'activerecord.attributes.login.email'
-            %th.groups
-              = t 'actions.groups.index'
+              = t 'activerecord.attributes.group.name'
+            %th.desc
+              = t 'activerecord.attributes.group.desc'
             %th.actions
         %tbody
-          = render @logins
+          = render @groups
       %pagination
         &nbsp;
         // Tabs loading content via AJAX?

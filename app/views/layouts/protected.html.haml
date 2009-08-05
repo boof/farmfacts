@@ -7,7 +7,7 @@
     = javascript_include_tag 'farmfacts'
     = stylesheet_link_tag 'farmfacts'
 
-    = stylesheet_link_tag '/javascripts/jquery/ui/smoothness/theme.css'
+    = stylesheet_link_tag '/javascripts/jquery/ui/farmfacts/theme.css'
     = javascript_include_tag '/javascripts/jquery/ui-1.7.2.js'
 
     :javascript
@@ -26,4 +26,9 @@
           .label.clock &nbsp;
 
     .content
+      - if error = flash[:error]
+        .ui-state-error= error
+      - if message = flash[:message]
+        .ui-state-highlight= message
+
       = yield

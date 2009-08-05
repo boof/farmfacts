@@ -1,4 +1,5 @@
 body {
+	background-color: lightslategray;
 	font-family: Verdana, Arial, sans-serif;
 	font-size: 12px;
 	margin: 0;
@@ -37,6 +38,7 @@ body {
 }
 #top li.ui-menu-content {
 	position: absolute;
+	border: 1px dashed #708090;
 	border-top: 1px solid #333333;
 	padding: 0 1.5em .5em 1em;
 }
@@ -46,8 +48,22 @@ body {
 }
 
 .content {
-	margin-top: 3em;
+	margin: 3em 4em 1em 4em;
 }
+
+table#logins {
+	border-collapse: collapse;
+	font-size: .9em;
+	width: 100%;
+}
+table#logins thead tr th { text-align: left; }
+table#logins thead tr th.name { width: 27%; }
+table#logins thead tr th.username { width: 12%; }
+table#logins thead tr th.email { width: 17%; }
+table#logins thead tr th.groups { width: 30%; }
+table#logins thead tr th.actions, table#logins tbody tr td.actions { min-width: 60px; text-align: right; width: 6%; }
+
+table#logins tr { height: 2.5em; }
 
 p {
 	font-size: 12px;

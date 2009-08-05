@@ -16,12 +16,16 @@ class Visit
   def self.return_uri
     instance { return_uri }
   end
+  def self.current_uri(suffix = '')
+    instance { current_uri suffix }
+  end
   def self.visitor
     instance { visitor }
   end
 
   def leave; @visitor = Login.new end
-  def return_uri; params[:return_uri] end
+  def return_uri; Rack::Utils.unescape params[:return_uri] if params[:return_uri] end
+  def current_uri(suffix = '') Rack::Utils.escape request.request_uri + suffix end
   attr_reader :visitor
 
   protected
@@ -54,9 +58,9 @@ class Visit
 
   module ControllerMethods
     def self.extended(base)
-      base.delegate :leave, :return_uri, :visitor, :to => Visit
-      base.hide_action :leave, :return_uri, :visitor
-      base.helper_method :return_uri, :visitor
+      base.delegate :leave, :return_uri, :visitor, :current_uri, :to => Visit
+      base.hide_action :leave, :return_uri, :current_uri, :visitor
+      base.helper_method :return_uri, :current_uri, :visitor
     end
     def anonymous(opts = {})
       before_filter(opts) { |ctrl|

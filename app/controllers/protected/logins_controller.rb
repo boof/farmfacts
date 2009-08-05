@@ -6,7 +6,7 @@ class Protected::LoginsController < Protected::Base
   before_filter :assign_login, :except => [:index]
 
   def index
-    @logins = @target.find :all
+    @logins = @target.find :all, :include => {:memberships => :group}
     set_title 'logins'
   end
   def show
@@ -24,7 +24,7 @@ class Protected::LoginsController < Protected::Base
     end
   end
   def edit
-    set_title 'protected.logins.edit', :actions, :name => @login.name
+    set_title 'logins'
     render :action => :edit
   end
   def update

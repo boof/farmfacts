@@ -24,11 +24,11 @@ var TitleBar = {
 	Menu: function(anchor) {
 		this.label = $(anchor);
 		this.label.parent('li').addClass('ui-menu-header');
-		this.label.click(function() {
+		this.label.click(function(e) {
 			TitleBar.hideMenus();
 			TitleBar.activate();
 			this.menu.show();
-			return false;
+			e.stopPropagation();
 		});
 
 		var position = this.label.position();
@@ -125,21 +125,16 @@ var FarmFacts = {
 
 	enhance_buttons: function() {
 		$(function() {
-			$('a.submit')
-				.addClass('ui-state-default ui-corner-all')
-				.after('<input type="submit" style="display: none;" />')
+			var q1 = $('a.submit')
+				.click(function(e) { $(this).next('input').click(); })
+				.after('<input type="submit" style="display: none;" />');
+
+			q1.add($('a.button'))
+				.addClass('ui-state-default')
 				.hover(
 					function() { $(this).addClass('ui-state-hover'); },
 					function() { $(this).removeClass('ui-state-hover'); }
-				)
-				.click(function() { $(this).next('input').click(); });
-			$('a.cancel')
-				.addClass('ui-state-default ui-corner-all')
-				.hover(
-					function() { $(this).addClass('ui-state-hover'); },
-					function() { $(this).removeClass('ui-state-hover'); }
-				)
-				.click(function() { window.location = this.href; });
+				);
 		});
 	},
 

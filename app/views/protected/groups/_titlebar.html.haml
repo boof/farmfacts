@@ -1,0 +1,14 @@
+%li.menu
+  - link_to '#current' do
+    .bold.label= title
+%li#current.hidden
+  %ul
+    %li= link_to t('actions.quit'), login_path
+%li.menu
+  - link_to '#groups' do
+    .label= t('actions.protected.groups.index')
+%li#groups.hidden
+  %ul
+    %li= link_to t('actions.protected.groups.new'), new_protected_group_path(:return_uri => request.request_uri)
+    %li= link_to t('actions.protected.groups.index'), protected_groups_path
+    %li= link_to t('actions.print'), 'javascript: window.print();'

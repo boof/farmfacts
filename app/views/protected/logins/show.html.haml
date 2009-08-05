@@ -1,15 +1,24 @@
-%div{ :style => 'margin: 1em auto; width: 560px;' }
-  .ui-widget
-    .ui-widget-header.ui-corner-top{ :style => 'border: none; padding: 2px 1em; font-weight: normal;' }= @login.name
-    .ui-widget-content{ :style => 'padding: 4px 1em;' }
-      %div= @login.first_name
-      %div= @login.last_name
-      %div= @login.username
-      %div= @login.email
+.ui-widget{ :style => 'min-width: 640px; width: 80%;' }
+  .ui-widget-header.ui-corner-top{ :style => 'border: none; padding: 3px 1em; font-weight: normal;' }= @login.name
+  .ui-widget-content{ :style => 'padding: 4px 1em;' }
+    %div
+      %div{ :style => 'float: left;' }= "#{ t 'activerecord.attributes.login.first_name' }:"
+      %p{ :style => 'margin-left: 10em' }= @login.first_name
+    %div
+      %div{ :style => 'float: left;' }= "#{ t 'activerecord.attributes.login.last_name' }:"
+      %p{ :style => 'margin-left: 10em' }= @login.last_name
+    %div
+      %div{ :style => 'float: left;' }= "#{ t 'activerecord.attributes.login.username' }:"
+      %p{ :style => 'margin-left: 10em' }= @login.username
+    %div
+      %div{ :style => 'float: left;' }= "#{ t 'activerecord.attributes.login.email' }:"
+      %p{ :style => 'margin-left: 10em' }= @login.email
 
-      %div &nbsp;
-
-      %p{ :style => 'padding-right: .5em; text-align: right;' }
-        %a.cancel{ :style => 'padding: 0.4em 1em 0.4em 20px; position: relative; text-decoration: none;', :href => return_uri }
-          %span.ui-icon.ui-icon-cancel{ :style => 'left: 0.2em; margin: -8px 5px 0 0; position: absolute; top:50%;' }
-          = t 'actions.back'
+%p
+  %a.button{ :style => 'padding: 0.4em 1em 0.4em 20px; position: relative; text-decoration: none;', :href => edit_protected_login_path(@login, :return_uri => current_uri) }
+    %span.ui-icon.ui-icon-pencil{ :style => 'left: 0.2em; margin: -8px 5px 0 0; position: absolute; top:50%;' }
+    = t 'actions.edit'
+  &nbsp;
+  %a.button{ :style => 'padding: 0.4em 1em 0.4em 20px; position: relative; text-decoration: none;', :href => protected_logins_path }
+    %span.ui-icon.ui-icon-cancel{ :style => 'left: 0.2em; margin: -8px 5px 0 0; position: absolute; top:50%;' }
+    = t 'actions.back'

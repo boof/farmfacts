@@ -20,3 +20,5 @@
   %div{ :style => 'float: left; margin: 0 .5em;' }
     = f.label :password_confirmation, t('activerecord.attributes.login.password_confirmation')
     %div= f.password_field :password_confirmation
+
+= hidden_field_tag :return_uri, params[:return_uri]

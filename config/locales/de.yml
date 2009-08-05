@@ -1,27 +1,34 @@
 de:
   titles:
-    logins: 'Benutzerverwaltung'
-    groups: 'Gruppenverwaltung'
+    logins: Benutzerverwaltung
+    groups: Gruppenverwaltung
     default: 'FarmFacts 2.0'
+  questions:
+    logins:
+      destroy: 'Wollen Sie den Benutzer {{name}} wirklich löschen?'
   actions:
+    edit: Bearbeiten
     back: Zurück
     quit: Beenden
-    print: Seite drucken
-    cancel: Aktion abbrechen
-    refresh: Seite aktualisieren
+    print: Drucken
+    cancel: Abbrechen
+    refresh: Aktualisieren
+    groups:
+      index: Gruppen
     logins:
       show: Dashboard
       forget: Abmelden
     protected:
       groups:
-        index: 'Gruppenverwaltung'
+        index: Gruppenverwaltung
+        new: 'Neue Gruppe anlegen'
       logins:
-        index: 'Benutzer'
+        index: Benutzer
         show: 'Benutzer {{name}} anzeigen'
         new: 'Neuen Benutzer anlegen'
         create: 'Benutzer erstellen'
         edit: 'Benutzer {{name}} bearbeiten'
-        update: 'Benutzer aktualisieren'
+        update: 'Benutzer speichern'
 
   activerecord:
     errors:
@@ -39,12 +46,15 @@ de:
             #password:
               #blank:
     attributes:
+      group:
+        name: Name
+        desc: Beschreibung
       login:
-        username: 'Benutzername'
-        first_name: 'Vorname'
-        last_name: 'Nachname'
-        email: 'E-Mail'
-        password: 'Passwort'
+        username: Benutzername
+        first_name: Vorname
+        last_name: Nachname
+        email: E-Mail
+        password: Passwort
         password_confirmation: 'Passwort Bestätigung'
     models:
 
