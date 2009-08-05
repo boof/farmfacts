@@ -1,0 +1,6 @@
+- content_tag_for :tr, group do
+  %td= link_to group.name, protected_group_path(group, :return_uri => current_uri("#group_#{ group.id }")), :title => t('actions.protected.group.show', :name => group.name)
+  %td= group.desc
+  %td.actions
+    = link_to icon(:pencil), edit_protected_group_path(group, :return_uri => current_uri("#group_#{ group.id }")), :class => :action
+    = link_to icon(:trash), protected_group_path(group), :method => :delete, :class => :action, :confirm => t('questions.group.destroy', :name => group.name)

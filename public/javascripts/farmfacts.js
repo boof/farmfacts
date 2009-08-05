@@ -134,7 +134,7 @@ var FarmFacts = {
 				.click(function(e) { $(this).next('input').click(); })
 				.after('<input type="submit" style="display: none;" />');
 
-			q1.add($('a.button'))
+			q1.add($('a.button')).add($('a.action'))
 				.addClass('ui-state-default')
 				.hover(
 					function() { $(this).addClass('ui-state-hover'); },

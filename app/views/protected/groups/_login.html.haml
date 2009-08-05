@@ -1,0 +1,9 @@
+- content_tag_for :tr, login do
+  %td= link_to "#{ login.last_name }, #{ login.first_name }", protected_login_path(login, :return_uri => current_uri("#login_#{ login.id }")), :title => t('actions.protected.logins.show', :name => login.name)
+  %td= login.username
+  %td= mail_to login.email
+  %td
+    = login.roles.map { |r| content_tag :span, r.group.name, r.leading?? {:class => 'bold'} : {} if r.group }.to_sentence
+  %td.actions
+    = link_to icon(:plusthick), protected_login_path(login), :method => :delete, :class => :action, :confirm => t('questions.logins.destroy', :name => login.name)
+    = link_to icon(:plus), edit_protected_login_path(login, :return_uri => current_uri("#login_#{ login.id }")), :class => :action

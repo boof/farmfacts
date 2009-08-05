@@ -64,12 +64,12 @@ table#logins thead tr th.username { width: 12%; }
 table#logins thead tr th.email { width: 17%; }
 table#logins thead tr th.groups { width: 30%; }
 table#logins thead tr th.actions, table#logins tbody tr td.actions { min-width: 60px; text-align: right; width: 6%; }
-table tr { height: 2.5em; }
+table tr { height: 2.6em; }
 table#groups thead tr th { text-align: left; }
 table#groups thead tr th.name { width: 27%; }
 table#groups thead tr th.desc { width: 67%; }
 table#groups thead tr th.actions, table#groups tbody tr td.actions { min-width: 60px; text-align: right; width: 6%; }
-table tr { height: 2.5em; }
+table tr { height: 2.6em; }
 
 p {
 	font-size: 12px;
@@ -77,21 +77,32 @@ p {
 	margin: 1em 0;
 }
 
+a.action {
+	outline: 0;
+	margin: 0 4px 0 0;
+	padding: .4em 1em;
+	text-decoration:none !important;
+	cursor: pointer;
+	position: relative;
+	text-align: center;
+	zoom: 1;
+}
 a.button, a.submit {
-   outline: 0;
-   margin:0 4px 0 0;
-   padding: .4em 1em;
-   text-decoration:none !important;
-   cursor:pointer;
-   position: relative;
-   text-align: center;
-   zoom: 1;
+	padding: 0.4em 1em 0.4em 20px;
+	position: relative;
+	text-decoration: none;
+}
+a.action .ui-icon {
+	left: 50%;
+	margin-left: -8px;
+	margin-top: -8px;
+	position: absolute;
+	top: 50%;
 }
 a.button .ui-icon, a.submit .ui-icon {
-	left:50%;
-	margin-left:-8px;
-	margin-top:-8px;
-	position:absolute;
-	top:50%;
+	left: 0.2em;
+	margin: -8px 5px 0 0;
+	position: absolute;
+	top: 50%;
 }
 

@@ -1,0 +1,56 @@
+.left{ :style => 'min-width: 640px; width: 80%;' }
+  .ui-widget
+    .ui-widget-header.ui-corner-top{ :style => 'border: none; padding: 3px 1em; font-weight: normal;' }= @group.name
+    .ui-widget-content.ui-helper-clearfix{ :style => 'padding: 4px 1em;' }
+      %div
+        %div{ :style => 'float: left;' }= "#{ t 'activerecord.attributes.group.name' }:"
+        %p{ :style => 'margin-left: 10em' }= @group.name
+      %div
+        %div{ :style => 'float: left;' }= "#{ t 'activerecord.attributes.group.desc' }:"
+        %p{ :style => 'margin-left: 10em' }
+          = @group.desc
+          - if @group.desc.blank?
+            = content_tag :span, t('activerecord.attributes.group.nodesc'), :style => 'color: silver; font-style: italic;'
+
+  %p
+    %a.button{ :href => protected_groups_path }= "#{ icon :cancel }#{ t 'actions.back' }"
+    %a.button{ :href => edit_protected_group_path(@group, :return_uri => current_uri) }= "#{ icon :pencil }#{ t 'actions.edit' }"
+
+  #tabs
+    %ul
+      %li= link_to t('actions.protected.groups.members.index'), '#members'
+      %li= link_to t('actions.protected.groups.members.select'), '#select'
+    #members
+      %table#logins.ui-helper-reset
+        %thead
+          %tr
+            %th.name
+              = "#{ t 'activerecord.attributes.login.last_name' },"
+              = t 'activerecord.attributes.login.first_name'
+            %th.username
+              = t 'activerecord.attributes.login.username'
+            %th.email
+              = t 'activerecord.attributes.login.email'
+            %th.groups
+              = t 'actions.groups.index'
+            %th.actions
+        %tbody
+          = render @group.roles
+    #select
+      %table#logins.ui-helper-reset
+        %thead
+          %tr
+            %th.name
+              = "#{ t 'activerecord.attributes.login.last_name' },"
+              = t 'activerecord.attributes.login.first_name'
+            %th.username
+              = t 'activerecord.attributes.login.username'
+            %th.email
+              = t 'activerecord.attributes.login.email'
+            %th.groups
+              = t 'actions.groups.index'
+            %th.actions
+        %tbody
+          = render :partial => 'login', :collection => @logins
+
+.right{ :style => 'padding-left: 2%; width: 18%;' }= @notes

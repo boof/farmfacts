@@ -1,0 +1,8 @@
+%div.ui-helper-clearfix{ :style => 'margin: 0 .5em .5em .5em;' }
+  = f.label :name, t('activerecord.attributes.group.name')
+  %div= f.text_field :name
+%div.ui-helper-clearfix{ :style => 'margin: 0 .5em .5em .5em;' }
+  = f.label :desc, t('activerecord.attributes.group.desc')
+  %div= f.text_area :desc, :style => 'height: 13em; width: 100%;'
+
+= hidden_field_tag :return_uri, params[:return_uri]
