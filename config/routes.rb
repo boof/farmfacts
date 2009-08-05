@@ -25,7 +25,11 @@ ActionController::Routing::Routes.draw do |map|
   #   end
 
   map.namespace :protected do |protect|
-    protect.resources :logins
+    protect.resources :logins do |logins|
+      logins.with_options :controller => 'roles', :path_prefix => '/protected/logins/:login_id/role' do |login_role|
+        login_role.role ':action/:group_id', :group_id => nil
+      end
+    end
     protect.resources :groups do |groups|
       groups.resources :roles
       groups.resources :logins

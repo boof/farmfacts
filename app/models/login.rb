@@ -3,7 +3,32 @@ class Login < ActiveRecord::Base
 
   default_scope :order => 'last_name, first_name'
 
-  has_many :roles
+  attr_accessor :q
+
+  def self.search(attributes)
+    attributes ||= {}
+
+    logins = if attributes[:q].blank?
+      find :all, :include => {:roles => :group}
+    else
+      term = "#{ attributes[:q] }%"
+      find :all, :include => {:roles => :group},
+        :conditions => ['first_name LIKE ? OR last_name LIKE ? OR username LIKE ?', term, term, term]
+    end
+
+    return logins, Login.new(attributes)
+  end
+
+  has_many :roles do
+    def leader_of?(group)
+      load_target
+      target.any? { |r| r.type == 'LeadingRole' and r.group_id == group.try(:id) }
+    end
+    def member_of?(group)
+      load_target
+      target.any? { |r| r.type == 'BelongingRole' and r.group_id == group.try(:id) }
+    end
+  end
   has_many :leaderships, :class_name => 'LeadingRole'
   has_many :memberships, :class_name => 'BelongingRole'
   has_many :groups, :through => :memberships
@@ -13,17 +38,18 @@ class Login < ActiveRecord::Base
   end
   alias_method :save_as_admin, :save_as_administrator
 
-  def save_as_leader(group)
-    save and roles << LeadingRole.new(:group => group)
-  end
-
-  def leads?(group)
-    leaderships.exists? :group_id => group.try(:id)
-  end
   def administrator?
     roles.exists? :type => 'AdministeringRole'
   end
   alias_method :admin?, :administrator?
+
+  def save_as_leader(group)
+    save and roles << LeadingRole.new(:group => group)
+  end
+
+  delegate :leader_of?, :to => :roles
+  alias_method :leads?, :leader_of?
+  delegate :member_of?, :to => :roles
 
   def self.generate_hash(*credentials)
     Digest::MD5.hexdigest credentials * '+'

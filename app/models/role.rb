@@ -4,6 +4,10 @@ class Role < ActiveRecord::Base
   belongs_to :login
   belongs_to :group
   validates_presence_of :login_id
-  validates_uniqueness_of :type, :scope => [:login_id, :group_id]
+  validates_uniqueness_of :login_id, :scope => :group_id
+
+  def name
+    I18n.translate("activerecord.models.#{ self.class.name.underscore }")
+  end
 
 end

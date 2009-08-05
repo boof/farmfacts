@@ -7,6 +7,8 @@ de:
     logins:
       destroy: 'Wollen Sie den Benutzer {{name}} wirklich löschen?'
   actions:
+    search: Suche
+    go: Los
     edit: Bearbeiten
     back: Zurück
     quit: Beenden
@@ -65,6 +67,9 @@ de:
         password: Passwort
         password_confirmation: 'Passwort Bestätigung'
     models:
+      role: Rolle
+      belonging_role: Mitglied
+      leading_role: Leiter
 
   date:
     formats:

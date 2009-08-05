@@ -35,6 +35,7 @@ var TitleBar = {
 		position.top += this.label.height();
 		this.container = $(anchor.hash);
 		this.container
+			.click(function(e) { e.stopPropagation(); })
 			.addClass('ui-menu-content ui-corner-bottom ui-widget-content')
 			.css({ left: position.left, top: position.top });
 
@@ -138,7 +139,7 @@ var FarmFacts = {
 	enhance_buttons: function() {
 		$(function() {
 			var q1 = $('a.submit')
-				.click(function(e) { $(this).next('input').click(); })
+				.click(function(e) { $(this).next('input').click(); e.preventDefault(); })
 				.after('<input type="submit" style="display: none;" />');
 
 			q1.add($('a.button')).add($('a.action'))

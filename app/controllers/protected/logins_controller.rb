@@ -6,7 +6,7 @@ class Protected::LoginsController < Protected::Base
   before_filter :assign_login, :except => [:index]
 
   def index
-    @logins = @target.find :all, :include => {:roles => :group}
+    @logins, @searcher = @target.search params[:login]
     set_title 'logins'
   end
   def show

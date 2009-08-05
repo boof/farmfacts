@@ -10,6 +10,7 @@ class Protected::GroupsController < Protected::Base
   end
   def show
     @group = Group.find params[:id], :include => {:roles => {:login => :roles}}
+    @roles = @group.roles.sort_by { |role| "#{ role.login.last_name }#{ role.login.first_name }" }
     @logins = Login.find :all, :include => {:roles => :group}
 
     set_title 'groups'

@@ -12,3 +12,11 @@
     %li= link_to t('actions.protected.logins.new'), new_protected_login_path(:return_uri => current_uri)
     %li= link_to t('actions.protected.logins.index'), protected_logins_path
     %li= link_to t('actions.print'), 'javascript: window.print();'
+%li.menu
+  - link_to '#search' do
+    .label= t('actions.search')
+%li#search.hidden
+  - form_for [:protected, @searcher], :html => { :method => :get } do |f|
+    %p
+      = f.text_field :q
+      %a.submit{ :href => '' }= "#{ icon :search }#{ t 'actions.go' }"

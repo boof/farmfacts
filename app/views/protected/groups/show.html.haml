@@ -32,10 +32,10 @@
             %th.email
               = t 'activerecord.attributes.login.email'
             %th.groups
-              = t 'actions.groups.index'
+              = t 'activerecord.models.role'
             %th.actions
         %tbody
-          = render @group.roles
+          = render :partial => 'role', :collection => @roles
     #select
       %table#logins.ui-helper-reset
         %thead
@@ -51,6 +51,6 @@
               = t 'actions.groups.index'
             %th.actions
         %tbody
-          = render :partial => 'login', :collection => @logins
+          = render :partial => 'login', :collection => @logins, :locals => {:group => @group}
 
 .right{ :style => 'padding-left: 2%; width: 18%;' }= @notes
