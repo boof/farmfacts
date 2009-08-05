@@ -1,5 +1,6 @@
 body {
 	background-color: lightslategray;
+	color: lavender;
 	font-family: Verdana, Arial, sans-serif;
 	font-size: 12px;
 	margin: 0;
@@ -11,6 +12,7 @@ body {
 
 #top {
 	background: #999999 url('/images/bg_top.png') repeat-x;
+	color: black;
 	font-size: 13px;
 	height: 22px;
 	padding: 0 1%;
@@ -51,7 +53,7 @@ body {
 	margin: 3em 4em 1em 4em;
 }
 
-table#logins {
+table {
 	border-collapse: collapse;
 	font-size: .9em;
 	width: 100%;
@@ -62,8 +64,12 @@ table#logins thead tr th.username { width: 12%; }
 table#logins thead tr th.email { width: 17%; }
 table#logins thead tr th.groups { width: 30%; }
 table#logins thead tr th.actions, table#logins tbody tr td.actions { min-width: 60px; text-align: right; width: 6%; }
-
-table#logins tr { height: 2.5em; }
+table tr { height: 2.5em; }
+table#groups thead tr th { text-align: left; }
+table#groups thead tr th.name { width: 27%; }
+table#groups thead tr th.desc { width: 67%; }
+table#groups thead tr th.actions, table#groups tbody tr td.actions { min-width: 60px; text-align: right; width: 6%; }
+table tr { height: 2.5em; }
 
 p {
 	font-size: 12px;
@@ -71,8 +77,21 @@ p {
 	margin: 1em 0;
 }
 
-a.cancel, a.submit {
-	padding: 0.4em 1em 0.4em 20px;
-	position: relative;
-	text-decoration: none;
+a.button, a.submit {
+   outline: 0;
+   margin:0 4px 0 0;
+   padding: .4em 1em;
+   text-decoration:none !important;
+   cursor:pointer;
+   position: relative;
+   text-align: center;
+   zoom: 1;
 }
+a.button .ui-icon, a.submit .ui-icon {
+	left:50%;
+	margin-left:-8px;
+	margin-top:-8px;
+	position:absolute;
+	top:50%;
+}
+

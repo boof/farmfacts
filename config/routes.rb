@@ -26,7 +26,10 @@ ActionController::Routing::Routes.draw do |map|
 
   map.namespace :protected do |protect|
     protect.resources :logins
-    protect.resources(:groups) { |groups| groups.resources :logins }
+    protect.resources :groups do |groups|
+      groups.resources :roles
+      groups.resources :logins
+    end
 
     protect.with_options :controller => 'setup' do |setup|
       setup.connect '/setup',

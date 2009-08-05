@@ -6,7 +6,7 @@ class Protected::LoginsController < Protected::Base
   before_filter :assign_login, :except => [:index]
 
   def index
-    @logins = @target.find :all, :include => {:memberships => :group}
+    @logins = @target.find :all, :include => {:roles => :group}
     set_title 'logins'
   end
   def show
@@ -42,10 +42,10 @@ class Protected::LoginsController < Protected::Base
   protected
 
     def group
-      @group ||= Group.find_by_id params[:group_id]
+      @group ||= Group.find params[:group_id] if params[:group_id]
     end
     def assign_target
-      @target = group ? group.memberships : Login
+      @target = group ? group.members : Login
     end
     def assign_login
       @login = @target.find_or_initialize_by_id params[:id]

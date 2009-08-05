@@ -9,6 +9,6 @@
     .label= t('actions.protected.logins.index')
 %li#logins.hidden
   %ul
-    %li= link_to t('actions.protected.logins.new'), new_protected_login_path(:return_uri => request.request_uri)
+    %li= link_to t('actions.protected.logins.new'), new_protected_login_path(:return_uri => current_uri)
     %li= link_to t('actions.protected.logins.index'), protected_logins_path
     %li= link_to t('actions.print'), 'javascript: window.print();'

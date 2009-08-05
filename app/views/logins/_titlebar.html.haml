@@ -9,6 +9,6 @@
     .label= title
 %li#dashboard.hidden
   %ul
-    %li= link_to t('titles.logins'), protected_logins_path(:return_uri => current_uri)
-    %li= link_to t('titles.groups'), protected_groups_path(:return_uri => current_uri)
+    %li= link_to t('titles.logins'), protected_logins_path
+    %li= link_to t('titles.groups'), protected_groups_path
     %li= link_to t('actions.print'), 'javascript: window.print();'

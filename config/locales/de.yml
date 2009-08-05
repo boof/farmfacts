@@ -1,7 +1,7 @@
 de:
   titles:
-    logins: Benutzerverwaltung
-    groups: Gruppenverwaltung
+    logins: Verwaltung der Benutzer
+    groups: Verwaltung der Gruppen
     default: 'FarmFacts 2.0'
   questions:
     logins:
@@ -20,8 +20,15 @@ de:
       forget: Abmelden
     protected:
       groups:
-        index: Gruppenverwaltung
+        index: Gruppen
+        show: 'Gruppe {{name}} anzeigen'
         new: 'Neue Gruppe anlegen'
+        create: 'Gruppe erstellen'
+        edit: 'Gruppe {{name}} bearbeiten'
+        update: 'Gruppe speichern'
+        members:
+          index: Mitglieder
+          select: Mitglieder verwalten
       logins:
         index: Benutzer
         show: 'Benutzer {{name}} anzeigen'
@@ -49,6 +56,7 @@ de:
       group:
         name: Name
         desc: Beschreibung
+        nodesc: keine Beschreibung vorhanden
       login:
         username: Benutzername
         first_name: Vorname

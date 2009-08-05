@@ -7,4 +7,6 @@ class Group < ActiveRecord::Base
   has_many :leaders, :through => :roles, :source => :login,
       :conditions => { 'roles.type' => 'Role::Leading' }
 
+  validates_presence_of :name
+
 end

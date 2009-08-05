@@ -94,6 +94,11 @@ var FarmFacts = {
 
 	register_lazy_loaded: function() {
 		$.lazy({
+			src: '/javascripts/jquery/ui/tabs.js',
+			name: 'tabs',
+			cache: true
+		});
+		$.lazy({
 			src: '/javascripts/jquery/jclock.js',
 			name: 'jclock',
 			cache: true

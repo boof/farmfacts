@@ -2,13 +2,16 @@ class Protected::GroupsController < Protected::Base
 
   before_filter :authorized?, :except => [:index, :show]
 
-  before_filter :assign_group, :except => [:index]
+  before_filter :assign_group, :except => [:index, :show]
 
   def index
-    @groups = Group.find :all, :include => {:memberships => :login}
+    @groups = Group.find :all
     set_title 'groups'
   end
   def show
+    @group = Group.find params[:id], :include => {:roles => {:login => :roles}}
+    @logins = Login.find :all, :include => {:roles => :group}
+
     set_title 'groups'
   end
   def new
