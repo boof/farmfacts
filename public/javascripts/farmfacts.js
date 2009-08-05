@@ -128,6 +128,12 @@ var FarmFacts = {
 		});
 	},
 
+	initialize_tabs: function() {
+		$(function() {
+			query = $('#tabs');
+			if (query.length > 0) { query.tabs(); }
+		});
+	}
 	enhance_buttons: function() {
 		$(function() {
 			var q1 = $('a.submit')
