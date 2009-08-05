@@ -11,7 +11,7 @@ task :bootstrap do
       File.open(git_excludes, 'a') { |f| f.puts 'config/database.yml' }
 
   database_yml = File.join app_dir, %w[ config database.yml ]
-  system ENV['EDITOR'] || 'vi', '-w', database_yml
+  system ENV['EDITOR'] || 'vi', database_yml
   File.exists? database_yml or
       raise RuntimeError, 'Could not find database.yml!'
 
