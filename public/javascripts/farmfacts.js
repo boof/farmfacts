@@ -78,6 +78,7 @@ var FarmFacts = {
 		this.initialize_titlebar();
 		this.start_clock();
 		this.enhance_buttons();
+		this.initialize_tabs();
 	},
 
 	initialize_titlebar: function() {
@@ -133,7 +134,7 @@ var FarmFacts = {
 			query = $('#tabs');
 			if (query.length > 0) { query.tabs(); }
 		});
-	}
+	},
 	enhance_buttons: function() {
 		$(function() {
 			var q1 = $('a.submit')
