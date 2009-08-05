@@ -13,10 +13,13 @@
         %p{ :style => 'margin-left: 10em' }= @login.username
       %div
         %div{ :style => 'float: left;' }= "#{ t 'activerecord.attributes.login.email' }:"
-        %p{ :style => 'margin-left: 10em' }= @login.email
+        %p{ :style => 'margin-left: 10em' }= mail_to @login.email
+      %div
+        %div{ :style => 'float: left;' }= "#{ t 'actions.groups.index' }:"
+        %p{ :style => 'margin-left: 10em' }= @login.memberships.map { |r| link_to content_tag(:span, r.group.name, r.leading?? {:class => 'bold'} : {}), protected_group_path(r.group) }.to_sentence
 
   %p
-    %a.button{ :href => protected_logins_path }= "#{ icon :cancel }#{ t 'actions.back' }"
+    %a.button{ :href => return_uri || protected_logins_path }= "#{ icon :cancel }#{ t 'actions.back' }"
     %a.button{ :href => edit_protected_login_path(@login, :return_uri => current_uri) }= "#{ icon :pencil }#{ t 'actions.edit' }"
 
 .right{ :style => 'padding-left: 2%; width: 18%;' }= @notes

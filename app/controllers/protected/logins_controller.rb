@@ -1,12 +1,10 @@
 class Protected::LoginsController < Protected::Base
 
   before_filter :authorized?, :except => [:index, :show]
-
-  before_filter :assign_target
-  before_filter :assign_login, :except => [:index]
+  before_filter :assign_searcher, :assign_login, :except => :index
 
   def index
-    @logins, @searcher = @target.search params[:login]
+    @logins, @searcher = Login.search params[:login]
     set_title 'logins'
   end
   def show
@@ -44,15 +42,16 @@ class Protected::LoginsController < Protected::Base
     def group
       @group ||= Group.find params[:group_id] if params[:group_id]
     end
-    def assign_target
-      @target = group ? group.members : Login
+    def assign_searcher
+      @searcher = Login.new
     end
     def assign_login
-      @login = @target.find_or_initialize_by_id params[:id]
+      @login = Login.find_or_initialize_by_id params[:id].to_i,
+          :include => {:roles => :group}
       @login.attributes = params[:login] if params[:login]
     end
     def authorized?
-      visitor.administrator? or visitor.leads? @group
+      visitor.administrator? or visitor.leads? group
     end
 
 end

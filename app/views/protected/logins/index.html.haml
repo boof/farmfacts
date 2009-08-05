@@ -24,3 +24,12 @@
       %pagination
         &nbsp;
         // Tabs loading content via AJAX?
+
+.right{ :style => 'padding-left: 2%; width: 18%;' }
+
+  - form_for [:protected, @searcher], :html => { :method => :get } do |f|
+    = f.text_field :q, :style => 'width: 100%;'
+    %p
+      %a.submit{ :href => '' }= "#{ icon :search }#{ t 'actions.search' }"
+
+  = @notes

@@ -35,7 +35,7 @@
               = t 'activerecord.models.role'
             %th.actions
         %tbody
-          = render :partial => 'role', :collection => @roles
+          = render :partial => 'role', :collection => @roles, :locals => {:group => @group}
     #select
       %table#logins.ui-helper-reset
         %thead

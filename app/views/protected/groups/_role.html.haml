@@ -1,6 +1,6 @@
 - login = role.login
 - content_tag_for :tr, login do
-  %td= link_to "#{ login.last_name }, #{ login.first_name }", protected_login_path(login, :return_uri => current_uri("#login_#{ login.id }")), :title => t('actions.protected.logins.show', :name => login.name)
+  %td= link_to "#{ login.last_name }, #{ login.first_name }", protected_group_login_path(group, login, :return_uri => current_uri("#login_#{ login.id }")), :title => t('actions.protected.logins.show', :name => login.name)
   %td= login.username
   %td= mail_to login.email
   %td= role.name

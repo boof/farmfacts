@@ -3,13 +3,13 @@
   %td= login.username
   %td= mail_to login.email
   %td
-    = login.roles.select { |r| r.group_id }.map { |r| content_tag :span, r.group.name, r.leading?? {:class => 'bold'} : {} if r.group }.to_sentence
+    = login.roles.select { |r| r.group_id }.map { |r| link_to content_tag(:span, r.group.name, r.leading?? {:class => 'bold'} : {}), protected_group_path(r.group) }.to_sentence
   %td.actions
     - if login.leader_of? group
-      = link_to icon(:plus), protected_login_role_path(:login_id => login.id, :group_id => group.id, :action => :belongs_to, :return_uri => current_uri('#select')), :method => :put, :class => :action
-      = link_to icon(:minus), protected_login_role_path(:login_id => login.id, :group_id => group.id, :action => :destroy, :return_uri => current_uri('#select')), :method => :delete, :class => :action
+      = link_to icon(:minus), protected_login_role_path(:login_id => login.id, :group_id => group.id, :action => :belongs_to, :return_uri => current_uri('#select')), :method => :put, :class => :action
+      = link_to icon(:minusthick), protected_login_role_path(:login_id => login.id, :group_id => group.id, :action => :destroy, :return_uri => current_uri('#select')), :method => :delete, :class => :action
     - elsif login.member_of? group
-      = link_to icon(:plusthick), protected_login_role_path(:login_id => login.id, :group_id => group.id, :action => :leads, :return_uri => current_uri('#select')), :method => :put, :class => :action
+      = link_to icon(:plus), protected_login_role_path(:login_id => login.id, :group_id => group.id, :action => :leads, :return_uri => current_uri('#select')), :method => :put, :class => :action
       = link_to icon(:minus), protected_login_role_path(:login_id => login.id, :group_id => group.id, :action => :destroy, :return_uri => current_uri('#select')), :method => :delete, :class => :action
     - else
       = link_to icon(:plusthick), protected_login_role_path(:login_id => login.id, :group_id => group.id, :action => :leads, :return_uri => current_uri('#select')), :method => :post, :class => :action

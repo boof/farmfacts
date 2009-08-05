@@ -1,4 +1,4 @@
-%div{ :style => 'min-width: 640px; width: 80%;' }
+.left{ :style => 'min-width: 640px; width: 80%;' }
   .ui-widget
     .ui-widget-header.ui-corner-top{ :style => 'border: none; padding: 2px 1em; font-weight: normal;' }
       = t 'actions.protected.groups.index'
@@ -19,3 +19,12 @@
       %pagination
         &nbsp;
         // Tabs loading content via AJAX?
+
+.right{ :style => 'padding-left: 2%; width: 18%;' }
+
+  - form_for [:protected, @searcher], :html => { :method => :get } do |f|
+    = f.text_field :q, :style => 'width: 100%;'
+    %p
+      %a.submit{ :href => '' }= "#{ icon :search }#{ t 'actions.search' }"
+
+  = @notes

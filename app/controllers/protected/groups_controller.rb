@@ -1,11 +1,11 @@
 class Protected::GroupsController < Protected::Base
 
   before_filter :authorized?, :except => [:index, :show]
-
+  before_filter :assign_searcher, :except => :index
   before_filter :assign_group, :except => [:index, :show]
 
   def index
-    @groups = Group.find :all
+    @groups, @searcher = Group.search params[:group]
     set_title 'groups'
   end
   def show
@@ -44,6 +44,9 @@ class Protected::GroupsController < Protected::Base
 
   protected
 
+    def assign_searcher
+      @searcher = Group.new
+    end
     def assign_group
       @group = Group.find_or_initialize_by_id params[:id]
       @group.attributes = params[:group] if params[:group]
