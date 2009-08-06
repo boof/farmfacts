@@ -25,7 +25,17 @@ class Visit
 
   def leave; @visitor = Login.new end
   def return_uri; Rack::Utils.unescape params[:return_uri] if params[:return_uri] end
-  def current_uri(suffix = '') Rack::Utils.escape request.request_uri + suffix end
+  def current_uri(suffix = '')
+    @base_uri ||= begin
+      params = request.query_string.split '&'
+      params.any? { |param| params.delete param if param[0, 10] == 'return_uri' }
+      params = "?#{ params.join '&' }" unless params.empty?
+
+      "#{ request.request_uri.split('?', 2).first }#{ params }"
+    end
+
+    Rack::Utils.escape "#{ @base_uri }#{ suffix }"
+  end
   attr_reader :visitor
 
   protected
