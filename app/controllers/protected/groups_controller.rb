@@ -52,10 +52,12 @@ class Protected::GroupsController < Protected::Base
       @group.attributes = params[:group] if params[:group]
     end
     def authorized?
-      visitor.administrator? or begin
+      authorized = visitor.administrator? or begin
         %w[ edit update ].include? action_name and
         visitor.leads? @group
       end
+
+      render :nothing => true unless authorized
     end
 
 end

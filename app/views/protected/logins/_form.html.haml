@@ -1,3 +1,8 @@
+- if visitor.admin?
+  %div{ :style => 'margin: .5em;' }
+    = check_box_tag :administrator, true, @login.admin?
+    %label{ :for => 'administrator' }= t 'activerecord.models.administering_role'
+
 .ui-helper-clearfix
   %div{ :style => 'float: left; margin: 0 .5em;' }
     = f.label :first_name, t('activerecord.attributes.login.first_name')
@@ -24,3 +29,4 @@
 &nbsp;
 
 = hidden_field_tag :return_uri, params[:return_uri]
+= hidden_field_tag :group_id, params[:group_id]

@@ -1,6 +1,6 @@
 class Group < ActiveRecord::Base
 
-  has_many :roles
+  has_many :roles, :dependent => :destroy
 
   has_many :members, :through => :roles, :source => :login,
       :conditions => { 'roles.type' => 'Role::Belonging' }

@@ -19,37 +19,50 @@ class Login < ActiveRecord::Base
     return logins, Login.new(attributes)
   end
 
-  has_many :roles do
+  has_many :roles, :dependent => :destroy do
+    def administrator?
+      if loaded?
+        target.any? { |r| r.type == 'AdministeringRole' }
+      else
+        exists? :type => 'AdministeringRole'
+      end
+    end
     def leader_of?(group)
-      load_target
-      target.any? { |r| r.type == 'LeadingRole' and r.group_id == group.try(:id) }
+      if loaded?
+        target.any? { |r| r.type == 'LeadingRole' and r.group_id == group.try(:id) }
+      else
+        exists? :type => 'LeadingRole', :group_id => group.try(:id)
+      end
     end
     def member_of?(group)
-      load_target
-      target.any? { |r| r.type == 'BelongingRole' and r.group_id == group.try(:id) }
+      if loaded?
+        target.any? { |r| r.type == 'BelongingRole' and r.group_id == group.try(:id) }
+      else
+        exists? :type => 'BelongingRole', :group_id => group.try(:id)
+      end
     end
   end
   has_many :leaderships, :class_name => 'LeadingRole'
   has_many :memberships, :class_name => 'BelongingRole'
   has_many :groups, :through => :memberships
 
-  def save_as_administrator
-    save and roles << AdministeringRole.new
+  def save_as_administrator(toggle)
+    save and if toggle
+      roles << AdministeringRole.new unless admin?
+    else
+      role = roles.find_by_type('AdministeringRole')
+      role.destroy if role
+    end
   end
   alias_method :save_as_admin, :save_as_administrator
-
-  def administrator?
-    roles.exists? :type => 'AdministeringRole'
-  end
-  alias_method :admin?, :administrator?
 
   def save_as_leader(group)
     save and roles << LeadingRole.new(:group => group)
   end
 
-  delegate :leader_of?, :to => :roles
+  delegate :administrator?, :leader_of?, :member_of?, :to => :roles
+  alias_method :admin?, :administrator?
   alias_method :leads?, :leader_of?
-  delegate :member_of?, :to => :roles
 
   def self.generate_hash(*credentials)
     Digest::MD5.hexdigest credentials * '+'

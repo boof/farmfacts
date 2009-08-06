@@ -16,7 +16,10 @@
         %p{ :style => 'margin-left: 10em' }= mail_to @login.email
       %div
         %div{ :style => 'float: left;' }= "#{ t 'actions.groups.index' }:"
-        %p{ :style => 'margin-left: 10em' }= @login.memberships.map { |r| link_to content_tag(:span, r.group.name, r.leading?? {:class => 'bold'} : {}), protected_group_path(r.group) }.to_sentence
+        %p{ :style => 'margin-left: 10em' }
+          = @login.roles.select { |r| r.group_id }.map { |r| link_to content_tag(:span, r.group.name, r.leading?? {:class => 'bold'} : {}), protected_group_path(r.group) }.to_sentence
+          - if @login.roles.select { |r| r.group_id }.empty?
+            = content_tag :span, t('activerecord.attributes.login.nogroups'), :style => 'color: silver; font-style: italic;'
 
   %p
     %a.button{ :href => return_uri || protected_logins_path }= "#{ icon :cancel }#{ t 'actions.back' }"

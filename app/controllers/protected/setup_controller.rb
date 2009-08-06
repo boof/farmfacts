@@ -8,13 +8,13 @@ class Protected::SetupController < ApplicationController
   end
   def create_user
     visitor.attributes = params[:login]
-    visitor.save_as_admin ? redirect_to(login_path) : new_user
+    visitor.save_as_admin(true) ? redirect_to(login_path) : new_user
   end
 
   protected
 
     def possible?
-      not Login.exists?
+      render :nothing => true if Login.exists?
     end
     before_filter :possible?
 

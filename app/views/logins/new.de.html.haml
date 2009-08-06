@@ -11,12 +11,15 @@
 
     :javascript
       FarmFacts.initialize();
+      $(function() { FarmFacts.form('#login', 'Anmelden'); });
 
   %body
-    - if visitor.errors[:base]
-      .error.prepend-top= visitor.errors[:base]
-
     #login{ :title => title }
+
+      - unless visitor.errors.blank?
+        .ui-state-error{ :style => 'margin-bottom: 1em; padding: .5em;' }
+          Die Anmeldung ist fehlgeschlagen, bitte überprüfen Sie ihre Eingabe
+          und versuchen Sie es erneut.
 
       - form_for :visitor, visitor, :url => login_path do |f|
         = hidden_field_tag :return_uri, return_uri
@@ -28,4 +31,4 @@
           = f.label :password, 'Passwort'
           = f.password_field :password
 
-        = submit_tag t('actions.logins.create')
+        = submit_tag nil, :style => 'display: none;'

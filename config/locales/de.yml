@@ -18,6 +18,8 @@ de:
     groups:
       index: Gruppen
     logins:
+      new: Anmeldung
+      create: Anmelden
       show: Dashboard
       forget: Abmelden
     protected:
@@ -66,10 +68,13 @@ de:
         email: E-Mail
         password: Passwort
         password_confirmation: 'Passwort Bestätigung'
+        nogroups: kein Mitglied einer Gruppe
     models:
+      norole: Keine Rolle
       role: Rolle
       belonging_role: Mitglied
       leading_role: Leiter
+      administering_role: Administrator
 
   date:
     formats:

@@ -15,7 +15,7 @@ class Protected::LoginsController < Protected::Base
     render :action => :new
   end
   def create
-    if @login.save
+    if save_login
       redirect_to return_uri || protected_login_path(@login)
     else
       new
@@ -26,7 +26,7 @@ class Protected::LoginsController < Protected::Base
     render :action => :edit
   end
   def update
-    if @login.save
+    if save_login
       redirect_to return_uri || protected_login_path(@login)
     else
       edit
@@ -39,19 +39,26 @@ class Protected::LoginsController < Protected::Base
 
   protected
 
+    def save_login
+      @login.save_as_admin params[:administrator]
+    end
+
     def group
-      @group ||= Group.find params[:group_id] if params[:group_id]
+      @group ||= Group.find params[:group_id] unless params[:group_id].blank?
     end
     def assign_searcher
       @searcher = Login.new
     end
     def assign_login
-      @login = Login.find_or_initialize_by_id params[:id].to_i,
+      @login = Login.find_or_initialize_by_id params[:id],
           :include => {:roles => :group}
       @login.attributes = params[:login] if params[:login]
     end
     def authorized?
-      visitor.administrator? or visitor.leads? group
+      return if visitor.admin?
+      return if group and visitor.leads? group and not params[:administrator]
+
+      render :nothing => true
     end
 
 end

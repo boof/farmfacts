@@ -1,7 +1,7 @@
 class LoginsController < ApplicationController
 
   def new
-    set_title 'logins.new'
+    set_title 'logins.new', :actions
     render :action => :new, :status => 401
   end
 

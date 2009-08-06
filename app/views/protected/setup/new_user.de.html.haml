@@ -11,36 +11,34 @@
 
     :javascript
       FarmFacts.initialize();
-      $(function() {
-        FarmFacts.form('#new_user', 'Anlegen');
-      });
+      $(function() { FarmFacts.form('#new_user', 'Anlegen'); });
 
   %body
-    .container
+    #new_user{ :title => title }
 
-      #new_user{ :title => title }
+      - unless visitor.errors.blank?
+        .ui-state-error{ :style => 'margin-bottom: 1em; padding: .5em;' }
+          Es sind Fehler beim Anlegen des Benutzers aufgetreten, bitte
+          überprüfen Sie ihre Eingabe.
 
-        - unless visitor.errors.blank?
-          .ui-state-error.append-bottom{ :style => 'padding: .5em;' }
-            Es sind Fehler beim Anlegen des Benutzers aufgetreten, bitte
-            überprüfen Sie ihre Eingabe.
+      - form_for :login, visitor, :url => { :action => :create_user } do |f|
+        %div
+          = f.label :first_name, 'Vorname'
+          = f.text_field :first_name, :style => 'width: 100%;'
+        %div
+          = f.label :last_name, 'Nachname'
+          = f.text_field :last_name, :style => 'width: 100%;'
+        %div
+          = f.label :username, 'Benutzer'
+          = f.text_field :username, :style => 'width: 100%;'
+        %div
+          = f.label :email, 'E-Mail'
+          = f.text_field :email, :style => 'width: 100%;'
+        %div
+          = f.label :password, 'Passwort'
+          = f.password_field :password, :style => 'width: 100%;'
+        %div
+          = f.label :password_confirmation, 'Passwort Bestätigung'
+          = f.password_field :password_confirmation, :style => 'width: 100%;'
 
-        - form_for :login, visitor, :url => { :action => :create_user } do |f|
-          %div
-            = f.label :first_name, 'Vorname'
-            = f.text_field :first_name, :style => 'width: 100%;'
-          %div
-            = f.label :last_name, 'Nachname'
-            = f.text_field :last_name, :style => 'width: 100%;'
-          %div
-            = f.label :username, 'Benutzer'
-            = f.text_field :username, :style => 'width: 100%;'
-          %div
-            = f.label :email, 'E-Mail'
-            = f.text_field :email, :style => 'width: 100%;'
-          %div
-            = f.label :password, 'Passwort'
-            = f.password_field :password, :style => 'width: 100%;'
-          %div
-            = f.label :password_confirmation, 'Passwort Bestätigung'
-            = f.password_field :password_confirmation, :style => 'width: 100%;'
+        = submit_tag nil, :style => 'display: none;'
