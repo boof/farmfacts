@@ -48,10 +48,10 @@ class Login < ActiveRecord::Base
 
   def save_as_administrator(toggle)
     save and if toggle
-      roles << AdministeringRole.new unless admin?
+      admin? or roles << AdministeringRole.new
     else
       role = roles.find_by_type('AdministeringRole')
-      role.destroy if role
+      role.nil? or role.destroy
     end
   end
   alias_method :save_as_admin, :save_as_administrator
