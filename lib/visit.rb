@@ -24,7 +24,9 @@ class Visit
   end
 
   def leave; @visitor = Login.new end
-  def return_uri; Rack::Utils.unescape params[:return_uri] if params[:return_uri] end
+  def return_uri
+    Rack::Utils.unescape params[:return_uri] if params[:return_uri]
+  end
   def current_uri(suffix = '')
     @base_uri ||= begin
       params = request.query_string.split '&'
