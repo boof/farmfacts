@@ -58,7 +58,7 @@ class Protected::LoginsController < Protected::Base
       return if visitor.admin?
       return if group and visitor.leads? group and not params[:administrator]
 
-      render :nothing => true
+      forbidden!
     end
 
 end

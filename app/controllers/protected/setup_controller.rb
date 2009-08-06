@@ -14,7 +14,7 @@ class Protected::SetupController < ApplicationController
   protected
 
     def possible?
-      render :nothing => true if Login.exists?
+      forbidden! if Login.exists?
     end
     before_filter :possible?
 

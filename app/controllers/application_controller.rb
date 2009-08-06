@@ -5,6 +5,9 @@ class ApplicationController < ActionController::Base; protected
   filter_parameter_logging :password, :password_confirmation
 
   around_filter Visit
+  def forbidden!
+    render :text => '403 Forbidden', :status => '403 Forbidden'
+  end
 
   around_filter LocaleNegotiation
   def set_title(title, *namespace)

@@ -53,7 +53,7 @@ class Protected::RolesController < Protected::Base
       visitor.admin? or visitor.leader_of? @group
     end
 
-    render :nothing => true unless authorized
+    forbidden! unless authorized
   end
 
 end

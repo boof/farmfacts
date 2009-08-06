@@ -57,7 +57,7 @@ class Protected::GroupsController < Protected::Base
         visitor.leads? @group
       end
 
-      render :nothing => true unless authorized
+      forbidden! unless authorized
     end
 
 end
