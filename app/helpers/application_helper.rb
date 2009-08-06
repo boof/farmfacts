@@ -1,7 +1,6 @@
 module ApplicationHelper
 
-  def icon(name, state = :default)
-    %Q'<span class=".ui-state-#{ state }">%s</span>' %
+  def icon(name)
     %Q'<span class="ui-icon ui-icon-#{ name }"></span>'
   end
 
