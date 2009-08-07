@@ -13,17 +13,15 @@ class Group < ActiveRecord::Base
 
   attr_accessor :q
 
-  def self.search(attributes)
+  def self.search(attributes, opts = {})
     attributes ||= {}
 
-    groups = if attributes[:q].blank?
-      find :all
+    scope = if attributes[:q].blank? then {}
     else
-      term = "%#{ attributes[:q] }%"
-      find :all, :conditions => ['name LIKE ?', term]
+      { :conditions => ['name LIKE ?', "%#{ attributes[:q] }%"] }
     end
 
-    return groups, Group.new(attributes)
+    return with_scope(scope) { find :all, opts }, Group.new(attributes)
   end
 
 end
