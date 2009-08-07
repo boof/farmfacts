@@ -1,4 +1,7 @@
 class Login < ActiveRecord::Base
+  Source = __FILE__
+  include Extensions::ActiveRecord
+
   CHARS = (0..9).to_a + ('a'..'z').to_a + ('A'..'Z').to_a
 
   default_scope :order => 'last_name, first_name'

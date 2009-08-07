@@ -1,4 +1,6 @@
 class Group < ActiveRecord::Base
+  Source = __FILE__
+  include Extensions::ActiveRecord
 
   has_many :roles, :dependent => :destroy
 

@@ -1,4 +1,6 @@
 class Role < ActiveRecord::Base
+  Source = __FILE__
+  include Extensions::ActiveRecord
 
   attr_protected :type, :group_id, :login_id
   belongs_to :login
