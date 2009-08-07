@@ -21,6 +21,9 @@ de:
 
     protected:
 
+      pages:
+        index:  Seiten
+
       groups:
         index:  Gruppen
         show:   'Gruppe {{name}} anzeigen'
