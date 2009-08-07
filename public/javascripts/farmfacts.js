@@ -151,19 +151,19 @@ var FarmFacts = {
 		});
 	},
 
-	form: function(query, caption) {
-		buttons = {};
+	form: function(query, caption, options) {
+		var buttons = {};
 		buttons[caption] = function() { $(this).dialog('close'); };
 
-		$(query).dialog({
+		var options = jQuery.extend({
 			bgiframe: true,
-			closeOnEscape: false,
 			draggable: false,
 			resizable: false,
 			autoOpen: true,
 			height: 'auto',
 			buttons: buttons,
-			beforeclose: function() { $('form', this).submit(); }
-		});
+		}, options);
+
+		$(query).dialog(options);
 	}
 };

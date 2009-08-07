@@ -6,6 +6,7 @@ body {
 	margin: 0;
 }
 
+.p { margin: 13px 0; }
 .left { float: left; }
 .right { float: right; }
 .bold { font-weight: bold; }

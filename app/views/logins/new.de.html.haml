@@ -4,31 +4,38 @@
   %head
     %title&= title
     = javascript_include_tag 'jquery-1.3.2', 'jquery/lazy-1.3', :cache => 'lazy-jquery'
-    = javascript_include_tag 'farmfacts'
-
-    = stylesheet_link_tag '/javascripts/jquery/ui/farmfacts/theme.css'
     = javascript_include_tag '/javascripts/jquery/ui-1.7.2.js'
+
+    = javascript_include_tag 'farmfacts'
+    = stylesheet_link_tag 'farmfacts'
+    = stylesheet_link_tag '/javascripts/jquery/ui/farmfacts/theme.css'
 
     :javascript
       FarmFacts.initialize();
-      $(function() { FarmFacts.form('#login', 'Anmelden'); });
+      $(function() {
+        FarmFacts.form('#login', 'Anmelden', {
+          beforeclose: function() { $('form', this).submit(); },
+          open: function() { $('#visitor_username').focus(); },
+          width: 320
+        });
+      });
 
   %body
     #login{ :title => title }
 
       - unless visitor.errors.blank?
         .ui-state-error{ :style => 'margin-bottom: 1em; padding: .5em;' }
-          Die Anmeldung ist fehlgeschlagen, bitte überprüfen Sie ihre Eingabe
+          Die Anmeldung ist fehlgeschlagen, bitte korrigieren Sie ihre Eingabe
           und versuchen Sie es erneut.
 
       - form_for :visitor, visitor, :url => login_path do |f|
         = hidden_field_tag :return_uri, return_uri
 
-        %div
+        .p{ :style => 'padding-top: 3px' }
+          = f.text_field :username, :class => 'right', :style => 'margin-top: -3px;'
           = f.label :username, 'Benutzer'
-          = f.text_field :username
-        %div
+        .p{ :style => 'padding-top: 3px' }
           = f.label :password, 'Passwort'
-          = f.password_field :password
+          = f.password_field :password, :class => 'right', :style => 'margin-top: -3px;'
 
         = submit_tag nil, :style => 'display: none;'

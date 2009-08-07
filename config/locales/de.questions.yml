@@ -1,0 +1,4 @@
+de:
+  questions:
+    logins:
+      destroy: 'Wollen Sie den Benutzer {{name}} wirklich löschen?'

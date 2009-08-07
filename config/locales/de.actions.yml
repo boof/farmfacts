@@ -1,0 +1,42 @@
+de:
+  actions:
+
+    back:     Zurück
+    cancel:   Abbrechen
+    edit:     Bearbeiten
+    go:       Los
+    print:    Drucken
+    quit:     Beenden
+    refresh:  Aktualisieren
+    search:   Suche
+
+    groups:
+      index:  Gruppen
+
+    logins:
+      show:   Dashboard
+      new:    Anmeldung
+      create: Anmelden
+      forget: Abmelden
+
+    protected:
+
+      groups:
+        index:  Gruppen
+        show:   'Gruppe {{name}} anzeigen'
+        new:    Neue Gruppe anlegen
+        create: Gruppe erstellen
+        edit:   'Gruppe {{name}} bearbeiten'
+        update: Gruppe speichern
+
+        members:
+          index:  Mitglieder
+          select: Mitglieder verwalten
+
+      logins:
+        index:  Benutzer
+        show:   'Benutzer {{name}} anzeigen'
+        new:    Neuen Benutzer anlegen
+        create: Benutzer erstellen
+        edit:   'Benutzer {{name}} bearbeiten'
+        update: Benutzer speichern
