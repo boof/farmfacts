@@ -1,0 +1,103 @@
+--- !ruby/object:Gem::Specification 
+name: xbel
+version: !ruby/object:Gem::Version 
+  version: 0.1.2
+platform: ruby
+authors: 
+- "Florian A\xC3\x9Fmann"
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2009-10-28 00:00:00 +01:00
+default_executable: 
+dependencies: 
+- !ruby/object:Gem::Dependency 
+  name: shoulda
+  type: :development
+  version_requirement: 
+  version_requirements: !ruby/object:Gem::Requirement 
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        version: "0"
+    version: 
+- !ruby/object:Gem::Dependency 
+  name: watchr
+  type: :runtime
+  version_requirement: 
+  version_requirements: !ruby/object:Gem::Requirement 
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        version: "0"
+    version: 
+- !ruby/object:Gem::Dependency 
+  name: nokogiri
+  type: :runtime
+  version_requirement: 
+  version_requirements: !ruby/object:Gem::Requirement 
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        version: "0"
+    version: 
+description: ""
+email: florian.assmann@email.de
+executables: []
+
+extensions: []
+
+extra_rdoc_files: 
+- LICENSE
+- README.markdown
+files: 
+- .document
+- .gitignore
+- .watchr
+- LICENSE
+- README.markdown
+- Rakefile
+- VERSION
+- lib/nokogiri/decorators/xbel.rb
+- lib/nokogiri/decorators/xbel/alias.rb
+- lib/nokogiri/decorators/xbel/bookmark.rb
+- lib/nokogiri/decorators/xbel/folder.rb
+- lib/nokogiri/decorators/xbel/seperator.rb
+- lib/xbel.rb
+- lib/xbel/writer.rb
+- test/complex.xbel
+- test/helper.rb
+- test/test_xbel.rb
+- xbel.gemspec
+has_rdoc: true
+homepage: http://xbel.monkey-patch.me
+licenses: []
+
+post_install_message: 
+rdoc_options: 
+- --charset=UTF-8
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+requirements: []
+
+rubyforge_project: 
+rubygems_version: 1.3.5
+signing_key: 
+specification_version: 3
+summary: Ruby API for XBEL based on Nokogiri and Watchr.
+test_files: 
+- test/helper.rb
+- test/test_xbel.rb
