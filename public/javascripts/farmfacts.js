@@ -64,6 +64,7 @@ var TitleBar = {
 		this.container = $(query).css({
 			position: 'fixed',
 			top: 0,
+			left: 0,
 			width: '98%'
 		});
 		$("li a[href^='#']", this.container)
@@ -155,13 +156,13 @@ var FarmFacts = {
 		var buttons = {};
 		buttons[caption] = function() { $(this).dialog('close'); };
 
-		var options = jQuery.extend({
+		var options = $.extend({
 			bgiframe: true,
 			draggable: false,
 			resizable: false,
 			autoOpen: true,
 			height: 'auto',
-			buttons: buttons,
+			buttons: buttons
 		}, options);
 
 		$(query).dialog(options);
