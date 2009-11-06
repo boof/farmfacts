@@ -1,0 +1,7 @@
+v0.1.1. Fixes for new version of FFI gem
+v0.1.0. Clean class method.
+v0.0.4. Options validation
+v0.0.3. Add method “errors” to return errors after cleanup
+v0.0.2. Do not require matchy, rr and context as development dependencies. A user does not need them.
+v0.0.1. Options support.
+v0.0.0. Initial release.

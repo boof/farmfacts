@@ -1,0 +1,128 @@
+--- !ruby/object:Gem::Specification 
+name: v
+version: !ruby/object:Gem::Version 
+  version: 0.1.0
+platform: ruby
+authors: 
+- "Florian A\xC3\x9Fmann"
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2009-11-03 00:00:00 +01:00
+default_executable: 
+dependencies: 
+- !ruby/object:Gem::Dependency 
+  name: riot
+  type: :development
+  version_requirement: 
+  version_requirements: !ruby/object:Gem::Requirement 
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        version: "0"
+    version: 
+- !ruby/object:Gem::Dependency 
+  name: yard
+  type: :development
+  version_requirement: 
+  version_requirements: !ruby/object:Gem::Requirement 
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        version: "0"
+    version: 
+- !ruby/object:Gem::Dependency 
+  name: fastthread
+  type: :runtime
+  version_requirement: 
+  version_requirements: !ruby/object:Gem::Requirement 
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        version: 1.0.7
+    version: 
+description: v is for versioned. It's is currently only a threaded wrapper for the git commands or procedures. In the future it should provide a generic interface for diverse VCSs.
+email: florian.assmann@email.de
+executables: []
+
+extensions: []
+
+extra_rdoc_files: 
+- LICENSE
+- README.markdown
+files: 
+- .document
+- .gitignore
+- .watchr
+- LICENSE
+- README.markdown
+- Rakefile
+- VERSION
+- auto_commit.rb
+- lib/v.rb
+- lib/v/adapters.rb
+- lib/v/adapters/git.rb
+- lib/v/adapters/git/branches.rb
+- lib/v/adapters/git/commits.rb
+- lib/v/adapters/git/environment.rb
+- lib/v/adapters/git/index.rb
+- lib/v/adapters/git/object.rb
+- lib/v/adapters/git/object_types/blob.rb
+- lib/v/adapters/git/object_types/commit.rb
+- lib/v/adapters/git/object_types/tag.rb
+- lib/v/adapters/git/object_types/tree.rb
+- lib/v/adapters/git/operations/add_to_index.rb
+- lib/v/adapters/git/operations/branch.rb
+- lib/v/adapters/git/operations/commit_index.rb
+- lib/v/adapters/git/operations/diff_index.rb
+- lib/v/adapters/git/operations/initialize_repository.rb
+- lib/v/adapters/git/operations/list_files.rb
+- lib/v/adapters/git/operations/list_tree.rb
+- lib/v/adapters/git/operations/push_references_to_remote.rb
+- lib/v/adapters/git/operations/remove_from_index.rb
+- lib/v/adapters/git/operations/reset_index.rb
+- lib/v/adapters/git/operations/show_log.rb
+- lib/v/adapters/git/operations/show_object.rb
+- lib/v/adapters/git/operations/tag.rb
+- lib/v/adapters/git/participation.rb
+- lib/v/adapters/git/remotes.rb
+- lib/v/adapters/git/status.rb
+- lib/v/arguments.rb
+- lib/v/errors.rb
+- lib/v/future.rb
+- lib/v/operation.rb
+- lib/v/worker.rb
+- test/teststrap.rb
+- test/v_test.rb
+has_rdoc: true
+homepage: http://github.com/boof/v
+licenses: []
+
+post_install_message: 
+rdoc_options: 
+- --charset=UTF-8
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+requirements: 
+- fastthread
+rubyforge_project: 
+rubygems_version: 1.3.5
+signing_key: 
+specification_version: 3
+summary: "'florian' says: v is talking git."
+test_files: 
+- test/teststrap.rb
+- test/v_test.rb
