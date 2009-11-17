@@ -1,0 +1,13 @@
+%li.folder{ :id => "entry-#{ folder.id }" }
+  .node
+    = image_tag 'icons/folder.gif', :size => '16x16'
+    .edit{ :style => 'font-weight: bold;', :id => "title-#{ folder.id }" }= folder.title
+    .actions.revealing
+      = link_to image_tag('icons/delete.gif', :size => '16x16'), protected_navigation_path(folder.id, I18n.locale, :return_uri => current_uri), :method => :delete, :title => t('farmfacts.delete_node')
+      = image_tag 'icons/add.gif', :size => '16x16'
+      = create_navigation_link :bookmark, :in => folder, :classes => :hidden
+      = create_navigation_link :folder, :in => folder, :classes => :hidden
+      = create_navigation_link :link, :in => folder, :classes => :hidden
+      = create_navigation_link :separator, :in => folder, :classes => :hidden
+  %ul.content{ :id => "content-#{ folder.id }" }
+    = render :partial => 'node', :collection => folder.entries

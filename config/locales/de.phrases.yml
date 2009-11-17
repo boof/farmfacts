@@ -1,0 +1,6 @@
+de:
+  phrases:
+    destroy_login: 'Wollen Sie den Benutzer {{name}} wirklich löschen?'
+    not_a_member: kein Mitglied einer Gruppe
+    description_missing: Beschreibung fehlt
+    no_role: keine Rolle

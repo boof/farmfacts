@@ -1,0 +1,16 @@
+%li.root{ :id => "entry-#{ root.id }" }
+  .node
+    .revealing{ :style => 'float: left; z-index: 1;' }
+      = flag @navigation.locale
+      %div.hidden
+        - for locale in I18n.available_locales.map { |sym| sym.to_s }.sort - [@navigation.locale]
+          %div= link_to flag(locale.split('-', 2).reverse.find { |code| code }), protected_navigations_path(:locale => locale)
+    .edit{ :style => 'font-weight: bold;', :id => "title-#{ root.id }" }= root.title
+    .actions.revealing
+      = image_icon :add
+      = create_navigation_link :bookmark, :in => root, :classes => :hidden
+      = create_navigation_link :folder, :in => root, :classes => :hidden
+      = create_navigation_link :link, :in => root, :classes => :hidden
+      = create_navigation_link :separator, :in => root, :classes => :hidden
+  %ul.content{ :id => "content-#{ root.id }" }
+    = render :partial => 'node', :collection => root.entries

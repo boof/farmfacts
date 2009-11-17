@@ -4,12 +4,16 @@ class ApplicationController < ActionController::Base; protected
   helper :all
   filter_parameter_logging :password, :password_confirmation
 
-  around_filter Visit
   def forbidden!
     render :text => '403 Forbidden', :status => '403 Forbidden'
   end
+  around_filter Visit
 
-  around_filter LocaleNegotiation
+  def locales
+    I18n.available_locales.map { |sym| sym.to_s }
+  end
+  include LanguageNegotiation::Extension
+
   def set_title(title, *namespace)
     options   = namespace.extract_options!
     namespace = namespace.map { |n| n.to_s } * '.'
@@ -21,5 +25,9 @@ class ApplicationController < ActionController::Base; protected
     @title ||= translate :'titles.default'
   end
   helper_method :title
+
+  def param(key, *default)
+    params.fetch key.to_s, *default
+  end
 
 end

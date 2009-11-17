@@ -1,0 +1,50 @@
+.main
+  .ui-widget
+    .ui-widget-header.ui-corner-top{ :style => 'border: none; padding: 2px 1em; font-weight: normal;' }
+      = t 'actions.protected.pages.index'
+    .ui-widget-content{ :style => 'padding: 4px 1em;' }
+      %ul#pageManager
+        = render :partial => 'root', :object => @navigation.root
+        :javascript
+          $(function() {
+            $('#pageManager .edit').editable('/protected/navigations.#{ I18n.locale }', {
+              tooltip: '#{ t('farmfacts.click_to_edit') }',
+              submitdata: {_method: 'put'}
+            });
+            $('#pageManager .folder, #pageManager .root').sortable({
+              appendTo: '#pageManager .root',
+              cursorAt: 'top',
+              connectWith: '#pageManager .folder, #pageManager .root',
+              items: '> .content li',
+              //helper: 'clone',
+              forceHelperSize: false,
+              opacity: 0.3,
+              //tolerance: 'pointer',
+              delay: 200,
+              start: function(event, ui) {
+                //var item = $(ui.item);
+                //ui.item.ghost = $('<div></div>');
+                //ui.item.ghost.width(item.width());
+                //ui.item.ghost.height(item.height());
+                //ui.item.ghost.insertBefore(item);
+              },
+              stop: function(event, ui) {
+                //ui.item.ghost.remove();
+              }
+            });
+          });
+      %br
+  %br
+
+.notes
+  -# form_for [:protected, @searcher], :html => { :method => :get } do |f|
+    =# f.text_field :q, :style => 'width: 100%;'
+    %p
+      %a.submit{ :href => '' }= "#{ icon :search }#{ t 'actions.search' }"
+  - @pages.keys.sort.each do |path|
+    - if page = @pages[path].find { |page| page.locale == I18n.locale }
+      %li
+        = page.path
+
+        %ul.page
+          = @pages[page.path].map { |p| flag p.locale }

@@ -1,7 +1,7 @@
 - if visitor.admin?
   %div{ :style => 'margin: .5em;' }
-    = check_box_tag :administrator, true, @login.admin?
-    %label{ :for => 'administrator' }= t 'activerecord.models.administering_role'
+    = f.check_box :become, { :checked => @login.administrator? }, 'administrator', ''
+    %label{ :for => 'login_become' }= t 'activerecord.models.administering_role'
 
 .ui-helper-clearfix
   %div{ :style => 'float: left; margin: 0 .5em;' }

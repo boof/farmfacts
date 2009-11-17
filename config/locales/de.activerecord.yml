@@ -1,28 +1,22 @@
 de:
   activerecord:
 
-    errors:
-
-      template:
-        header:
-          #one: '{{model}}'
-          #other: '{{model}}{{count}}'
-        #body:
-
-      models:
-        #login:
-          #attributes:
-            #username:
-              #blank:
-            #password:
-              #blank:
-
     attributes:
+
+      page:
+        path: Pfad
+        path_prompt: pfad
+        locale: Sprachumgebung
+        locales: Sprachumgebungen
+        locale_prompt: de
+        sources:
+          text: Quelltext
+          page: Seite
+          file: Datei
 
       group:
         name:   Name
         desc:   Beschreibung
-        nodesc: keine Beschreibung vorhanden
 
       login:
         username:               Benutzername
@@ -31,12 +25,10 @@ de:
         email:                  E-Mail
         password:               Passwort
         password_confirmation:  Passwort Bestätigung
-        nogroups:               kein Mitglied einer Gruppe
 
     models:
       role:               Rolle
       belonging_role:     Mitglied
       leading_role:       Leiter
       administering_role: Administrator
-      norole:             Keine Rolle
-
+      page:               Seite

@@ -1,4 +1,4 @@
-.left{ :style => 'min-width: 640px; width: 80%;' }
+.main
   .ui-widget
     .ui-widget-header.ui-corner-top{ :style => 'border: none; padding: 3px 1em; font-weight: normal;' }= @login.name
     .ui-widget-content{ :style => 'padding: 4px 1em;' }
@@ -19,10 +19,10 @@
         %p{ :style => 'margin-left: 10em' }
           = @login.roles.select { |r| r.group_id }.map { |r| link_to content_tag(:span, r.group.name, r.leading?? {:class => 'bold'} : {}), protected_group_path(r.group) }.to_sentence
           - if @login.roles.select { |r| r.group_id }.empty?
-            = content_tag :span, t('activerecord.attributes.login.nogroups'), :style => 'color: silver; font-style: italic;'
+            = content_tag :span, t('phrases.not_a_member'), :style => 'color: silver; font-style: italic;'
 
   %p
     %a.button{ :href => return_uri || protected_logins_path }= "#{ icon :cancel }#{ t 'actions.back' }"
     %a.button{ :href => edit_protected_login_path(@login, :return_uri => current_uri) }= "#{ icon :pencil }#{ t 'actions.edit' }"
 
-.right{ :style => 'padding-left: 2%; width: 18%;' }= @notes
+.notes

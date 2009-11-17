@@ -1,28 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
-  # The priority is based upon order of creation: first created -> highest priority.
 
-  # Sample of regular route:
-  #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
-  # Keep in mind you can assign values other than :controller and :action
-
-  # Sample of named route:
-  #   map.purchase 'products/:id/purchase', :controller => 'catalog', :action => 'purchase'
-  # This route can be invoked with purchase_url(:id => product.id)
-
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   map.resources :products
-
-  # Sample resource route with options:
-  #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
-
-  # Sample resource route with sub-resources:
-  #   map.resources :products, :has_many => [ :comments, :sales ], :has_one => :seller
-  
-  # Sample resource route with more complex sub-resources
-  #   map.resources :products do |products|
-  #     products.resources :comments
-  #     products.resources :sales, :collection => { :recent => :get }
-  #   end
+  # insert your routes here...
 
   map.namespace :protected do |protect|
     protect.resources :logins do |logins|
@@ -30,6 +8,20 @@ ActionController::Routing::Routes.draw do |map|
         login_role.role ':action/:group_id', :group_id => nil
       end
     end
+
+    #protect.resources :navigations, :except => [:index, :new, :edit]
+    # protected_navigation_path(folder.id, :locale => I18n.locale, :return_uri => current_uri)
+    # protected_navigation_url failed to generate from {:controller=>"protected/navigations", :locale=>"de", :return_uri=>"%2Fprotected%2Fpages", :action=>"show", :id=>"1.2"}, expected: {:controller=>"protected/navigations", :action=>"show"}, diff: {:locale=>"de", :return_uri=>"%2Fprotected%2Fpages", :id=>"1.2"}
+
+    protect.with_options :controller => 'navigations' do |navigations|
+      navigations.navigation 'navigations/:id.:locale', :action => 'show', :conditions => {:method => :get}
+      navigations.connect 'navigations/:parent_id.:locale', :action => 'create', :conditions => {:method => :post}
+      navigations.connect 'navigations.:locale', :action => 'update', :conditions => {:method => :put}
+      navigations.connect 'navigations/:id.:locale', :action => 'destroy', :conditions => {:method => :delete}
+      navigations.navigations 'pages.:locale', :action => 'index'
+    end
+    protect.resources :pages, :except => :index
+
     protect.resources :groups do |groups|
       groups.resources :roles
       groups.resources :logins
@@ -44,13 +36,5 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.resource :login, :member => { :destroy => :get }
-
-  map.with_options :conditions => { :method => :get } do |get|
-    get.pages '/pages', :controller => 'pages', :action => 'index'
-    get.with_options :controller => 'pages', :action => 'show' do |pages|
-      pages.root :p => []
-      pages.connect '*p'
-    end
-  end
 
 end

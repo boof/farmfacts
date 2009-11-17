@@ -3,15 +3,11 @@
 
   %head
     %title&= title
-    = javascript_include_tag 'jquery-1.3.2', 'jquery/lazy-1.3', :cache => 'lazy-jquery'
-    = javascript_include_tag 'farmfacts'
-    = stylesheet_link_tag 'farmfacts'
-
-    = stylesheet_link_tag '/javascripts/jquery/ui/farmfacts/theme.css'
-    = javascript_include_tag '/javascripts/jquery/ui-1.7.2.js'
+    = stylesheet_link_tag 'application', 'farmfacts'
+    = javascript_include_tag :defaults
 
     :javascript
-      FarmFacts.initialize();
+      FarmFacts($);
 
   %body
     #top

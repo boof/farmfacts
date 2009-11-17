@@ -1,0 +1,7 @@
+de:
+  xbel:
+    nodes:
+      bookmark: Neues Lesezeichen
+      bookmark_n: 'Neues Lesezeichen {{n}}'
+      folder: Neues Verzeichnis
+      folder_n: 'Neues Verzeichnis {{n}}'

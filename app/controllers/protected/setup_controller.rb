@@ -8,7 +8,7 @@ class Protected::SetupController < ApplicationController
   end
   def create_user
     visitor.attributes = params[:login]
-    visitor.save_as_admin(true) ? redirect_to(login_path) : new_user
+    visitor.save ? redirect_to(login_path) : new_user
   end
 
   protected

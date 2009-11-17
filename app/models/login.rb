@@ -22,6 +22,7 @@ class Login < ActiveRecord::Base
     return logins, Login.new(attributes)
   end
 
+  # TODO: implement rbac
   has_many :roles, :dependent => :destroy do
     def administrator?
       if loaded?
@@ -49,15 +50,16 @@ class Login < ActiveRecord::Base
   has_many :memberships, :class_name => 'BelongingRole'
   has_many :groups, :through => :memberships
 
-  def save_as_administrator(toggle)
-    save and if toggle
-      admin? or roles << AdministeringRole.new
-    else
-      role = roles.find_by_type('AdministeringRole')
-      role.nil? or role.destroy
-    end
+  def become
+    @become ||= ActiveSupport::StringInquirer.new
   end
-  alias_method :save_as_admin, :save_as_administrator
+  def become=(rolename)
+    @become = ActiveSupport::StringInquirer.new rolename
+  end
+
+  def is?(role)
+    member_of? groups.find_by_name("#{ role }".pluralize)
+  end
 
   def save_as_leader(group)
     save and roles << LeadingRole.new(:group => group)
@@ -146,5 +148,15 @@ class Login < ActiveRecord::Base
     super if name !~ /password/
   end
   protected :attribute_for_inspect
+
+  def set_role
+    if become.administrator?
+      roles << AdministeringRole.new unless administrator?
+    else
+      roles.find_all_by_type('AdministeringRole').each { |role| role.destroy }
+    end
+  end
+  after_save :set_role
+  protected :set_role
 
 end

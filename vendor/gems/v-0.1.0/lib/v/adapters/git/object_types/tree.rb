@@ -34,7 +34,7 @@ module V
           raise NotImplementedError
         end
         def /(object, path)
-          path.split("/").inject(object) { |obj, name| obj.content.fetch name }
+          path.to_s.split('/').inject(object) { |obj, name| obj.content.fetch name }
         end
 
         def path(parent, *basenames)

@@ -1,0 +1,22 @@
+%li.menu
+  - link_to '#current' do
+    .bold.label= title
+%li#current.hidden
+  %ul
+    %li= link_to t('actions.quit'), login_path
+%li.menu
+  - link_to '#pages' do
+    .label= t('actions.protected.pages.index')
+%li#pages.hidden
+  %ul
+    %li= link_to t('actions.protected.pages.new'), new_protected_page_path(:return_uri => current_uri, :page => {:locale => I18n.locale})
+    %li= link_to t('actions.protected.pages.index'), protected_navigations_path(I18n.locale)
+    %li= link_to t('actions.print'), 'javascript: window.print();'
+%li.menu
+  - link_to '#search' do
+    .label= t('actions.search')
+%li#search.hidden
+  -# form_for [:protected, @searcher], :html => { :method => :get } do |f|
+    %p
+      =# f.text_field :q
+      %a.submit{ :href => '' }= "#{ icon :search }#{ t 'actions.go' }"

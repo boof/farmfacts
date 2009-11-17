@@ -1,0 +1,41 @@
+.main
+  - form_for [:protected, @page], :html => {:multipart => true} do |f|
+    .ui-widget
+      .ui-widget-header.ui-corner-top{ :style => 'padding: 3px 1em; font-weight: normal;' }= t 'actions.protected.pages.new'
+      .ui-widget-content{ :style => 'padding: 4px 1em;' }
+
+        .ui-helper-clearfix{ :style => 'font-size: 1.5em; margin: .5em 2em;' }
+          %div{ :style => 'float: left; width: 1em;' }
+            \/
+          %div{ :style => 'float: right; text-align: right; width: 6em;' }
+            \.
+            = f.text_field :locale, :maxlength => 5, :tabindex => 2
+          %div
+            %div{ :style => 'margin: 0 6em 0 1em;' }
+              = f.text_field :path, :class => 'selected', :style => 'width: 100%;', :tabindex => 1
+
+        #sourceTabs.ui-helper-clearfix{ :style => 'margin: 1em 1em 0em 1em;' }
+          %ul
+            %li
+              %a{ :href => '#textSource' }= t 'activerecord.attributes.page.sources.text'
+            %li
+              %a{ :href => '#pageSource' }= t 'activerecord.attributes.page.sources.page'
+            %li
+              %a{ :href => '#fileSource' }= t 'activerecord.attributes.page.sources.file'
+          #textSource
+            = f.text_area :html, :style => 'font-family: Monaco, monospace; width: 100%;', :tabindex => 3, :class => 'codeArea'
+          #pageSource
+            = f.select :page_id, @pages.map { |page| [page.href, page.id] }, :include_blank => true, :tabindex => 4
+          #fileSource
+            = f.file_field :html_file, :tabindex => 5
+
+    %p
+      %a.button{ :href => return_uri }= "#{ icon :cancel }#{ t 'actions.cancel' }"
+      %a.submit{ :href => '#' }= "#{ icon :disk }#{ t 'actions.protected.pages.create' }"
+
+.notes
+  - unless @page.errors.empty?
+    .ui-state-error= error_messages_for :page
+
+:javascript
+  $("#sourceTabs").tabs();

@@ -1,0 +1,15 @@
+page.insert_html('top', "#content-#{ @parent_id }", :partial => 'node', :object => @node)
+page << <<-JS
+(function($) {
+  var el = $('#content-#{ @parent_id } li:first').get();
+  $('.revealing', el).revealing();
+  $('.loadsScript', el).loadsScript();
+  $('.hidden', el).hide();
+  $('.edit', el)
+  .editable('/protected/navigations.#{ I18n.locale }', {
+    tooltip: '#{ t('farmfacts.click_to_edit') }',
+    submitdata: {_method: 'put'}
+  });
+  $('#pageManager .folder, #pageManager .root').sortable('refresh');
+})($);
+JS

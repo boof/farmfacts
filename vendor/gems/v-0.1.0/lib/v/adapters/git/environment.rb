@@ -77,8 +77,6 @@ module V
             @which_git ||= @@which_git
             @which_git.strip!
 
-            raise if @which_git.empty?
-
             @branches = Branches.new self
             @index = Index.new self
           end

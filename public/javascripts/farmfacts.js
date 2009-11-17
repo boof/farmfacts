@@ -72,87 +72,65 @@ var TitleBar = {
 	}
 };
 
-var FarmFacts = {
+var FarmFacts = function($) {
+	$.lazy({ src: '/javascripts/jquery.jclock.js',
+		name: 'jclock', cache: true });
+	$.lazy({ src: '/javascripts/jquery-ui.js',
+		name: 'draggable', cache: true });
+	$.lazy({ src: '/javascripts/ui/ui.tabs.js',
+		dependencies: { js: ['/javascripts/jquery-ui.js'] },
+		name: 'tabs', cache: true });
+	$.lazy({ src: '/javascripts/ui/ui.sortable.js',
+		dependencies: { js: ['/javascripts/jquery-ui.js'] },
+		name: 'sortable', cache: true });
+	$.lazy({ src: '/javascripts/ui/ui.resizable.js',
+		dependencies: { js: ['/javascripts/jquery-ui.js'] },
+		name: 'resizable', cache: true });
+	$.lazy({ src: '/javascripts/ui/ui.dialog.js',
+		dependencies: { js: ['/javascripts/jquery-ui.js'] },
+		name: 'dialog', cache: true });
+	$.lazy({ src: '/javascripts/jquery.jeditable.js',
+		name: 'editable', cache: true });
 
-	initialize: function() {
-		this.hide_hidden_elements();
-		this.register_lazy_loaded();
-		this.initialize_titlebar();
-		this.start_clock();
-		this.enhance_buttons();
-		this.initialize_tabs();
-	},
+	$.fn.revealing = function() {
+		return this
+			.mouseover(function() { $('.hidden', this).show(); })
+			.mouseout(function() { $('.hidden', this).hide(); });
+	}
+	$.fn.selected = function() { return this.focus().select(); }
+	$.fn.loadsScript = function() {
+		return this.click(function(e) {
+			$.post(this.href, null, null, 'script');
+			e.stopPropagation();
+			e.preventDefault();
+		});
+	}
 
-	initialize_titlebar: function() {
-		$(function() { TitleBar.initialize('#top'); });
-	},
+	$(function() {
+		$('.hidden').hide();
+		$('.revealing').revealing();
+		$('.selected').selected();
+		$('.loadsScript').loadsScript();
 
-	start_clock: function() {
-		$(function() { $('.clock').jclock(); });
-	},
+		TitleBar.initialize('#top'); // TODO: make this a jquery
+		var query = $('.clock');
+		if(query.length > 0) query.jclock();
+		var query = $('#tabs');
+		if (query.length > 0) { query.tabs(); }
 
-	hide_hidden_elements: function() {
-		$(function() { $('.hidden').hide(); });
-	},
+		// add button behaviour to links
+		var q1 = $('a.submit')
+			.click(function(e) { $(this).next('input').click(); e.preventDefault(); })
+			.after('<input type="submit" style="display: none;" />');
+		q1.add($('a.button')).add($('a.action'))
+			.addClass('ui-state-default')
+			.hover(
+				function() { $(this).addClass('ui-state-hover'); },
+				function() { $(this).removeClass('ui-state-hover'); }
+			);
+	});
 
-	register_lazy_loaded: function() {
-		$.lazy({
-			src: '/javascripts/jquery/ui/tabs.js',
-			name: 'tabs',
-			cache: true
-		});
-		$.lazy({
-			src: '/javascripts/jquery/jclock.js',
-			name: 'jclock',
-			cache: true
-		});
-		$.lazy({
-			src: '/javascripts/jquery/ui/resizable.js',
-			name: 'resizable',
-			cache: true
-		});
-		$.lazy({
-			src: '/javascripts/jquery/ui/draggable.js',
-			name: 'draggable',
-			cache: true
-		});
-		$.lazy({
-			src: '/javascripts/jquery/ui/dialog.js',
-			name: 'dialog',
-			cache: true
-		});
-		$.lazy({
-			src: '/javascripts/jquery/ui/fg/menu.js',
-			name: 'menu',
-			dependencies: {
-				css: ['/javascripts/jquery/ui/fg/menu.css']
-			},
-			cache: true
-		});
-	},
-
-	initialize_tabs: function() {
-		$(function() {
-			query = $('#tabs');
-			if (query.length > 0) { query.tabs(); }
-		});
-	},
-	enhance_buttons: function() {
-		$(function() {
-			var q1 = $('a.submit')
-				.click(function(e) { $(this).next('input').click(); e.preventDefault(); })
-				.after('<input type="submit" style="display: none;" />');
-
-			q1.add($('a.button')).add($('a.action'))
-				.addClass('ui-state-default')
-				.hover(
-					function() { $(this).addClass('ui-state-hover'); },
-					function() { $(this).removeClass('ui-state-hover'); }
-				);
-		});
-	},
-
-	form: function(query, caption, options) {
+	FarmFacts.dialog = function(query, caption, options) {
 		var buttons = {};
 		buttons[caption] = function() { $(this).dialog('close'); };
 
@@ -165,6 +143,6 @@ var FarmFacts = {
 			buttons: buttons
 		}, options);
 
-		$(query).dialog(options);
-	}
+		$(function() { $(query).dialog(options); });
+	};
 };

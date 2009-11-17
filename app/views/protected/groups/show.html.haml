@@ -1,4 +1,4 @@
-.left{ :style => 'min-width: 640px; width: 80%;' }
+.main
   .ui-widget
     .ui-widget-header.ui-corner-top{ :style => 'border: none; padding: 3px 1em; font-weight: normal;' }= @group.name
     .ui-widget-content.ui-helper-clearfix{ :style => 'padding: 4px 1em;' }
@@ -10,7 +10,7 @@
         %p{ :style => 'margin-left: 10em' }
           = @group.desc
           - if @group.desc.blank?
-            = content_tag :span, t('activerecord.attributes.group.nodesc'), :style => 'color: silver; font-style: italic;'
+            = content_tag :span, t('phrases.description_missing'), :style => 'color: silver; font-style: italic;'
 
   %p
     %a.button{ :href => protected_groups_path }= "#{ icon :cancel }#{ t 'actions.back' }"
@@ -53,4 +53,4 @@
         %tbody
           = render :partial => 'login', :collection => @logins, :locals => {:group => @group}
 
-.right{ :style => 'padding-left: 2%; width: 18%;' }= @notes
+.notes

@@ -1,0 +1,7 @@
+%tr
+  %td
+    = path
+  %td
+    = @pages[path].map { |page| link_to flag(page.locale), edit_protected_page_path(page) }
+  %td.actions
+    

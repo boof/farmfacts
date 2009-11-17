@@ -3,17 +3,13 @@
 
   %head
     %title&= title
-    = javascript_include_tag 'jquery-1.3.2', 'jquery/lazy-1.3', :cache => 'lazy-jquery'
-    = javascript_include_tag '/javascripts/jquery/ui-1.7.2.js'
-
-    = javascript_include_tag 'farmfacts'
-    = stylesheet_link_tag 'farmfacts'
-    = stylesheet_link_tag '/javascripts/jquery/ui/farmfacts/theme.css'
+    = stylesheet_link_tag 'application', 'farmfacts'
+    = javascript_include_tag :defaults
 
     :javascript
-      FarmFacts.initialize();
+      FarmFacts($);
       $(function() {
-        FarmFacts.form('#login', 'Anmelden', {
+        FarmFacts.dialog('#login', 'Anmelden', {
           beforeclose: function() { $('form', this).submit(); },
           open: function() { $('#visitor_username').focus(); },
           width: 320

@@ -23,6 +23,8 @@ de:
 
       pages:
         index:  Seiten
+        new:    Neue Seite Anlegen
+        create: Seite erstellen
 
       groups:
         index:  Gruppen

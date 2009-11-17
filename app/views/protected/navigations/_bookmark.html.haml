@@ -1,0 +1,10 @@
+%li.bookmark
+  .node{ :id => "entry-#{ bookmark.id }" }
+    = image_tag 'icons/page.gif', :size => '16x16'
+    .edit{ :id => "title-#{ bookmark.id }" }= bookmark.title || t('bookmark.missing.title')
+    .actions
+      = link_to image_icon(:delete), "/protected/navigations/#{ bookmark.id }.#{ I18n.locale }", :title => 'Delete node', :method => :delete, :confirm => 'Delete node?'
+      = link_to image_icon(:add), new_protected_page_path(:page => {:path => bookmark.href, :locale => I18n.locale}, :return_uri => current_uri), :title => t('farmfacts.create_page')
+    .edit{ :style => 'float: right;', :id => "href-#{ bookmark.id }" }= bookmark.href || t('bookmark.missing.href')
+  %ul.page
+    = (@pages.delete(Page.sanitize_path!("#{ bookmark.href }")) || []).map { |page| link_to flag(page.locale), edit_protected_page_path(page) }

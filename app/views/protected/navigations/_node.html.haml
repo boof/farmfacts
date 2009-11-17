@@ -1,0 +1,8 @@
+- if node.alias?
+  = render :partial => 'link', :object => node
+- elsif node.bookmark?
+  = render :partial => 'bookmark', :object => node
+- elsif node.folder?
+  = render :partial => 'folder', :object => node
+- else
+  = render :partial => 'separator', :object => node

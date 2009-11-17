@@ -1,4 +1,4 @@
-.left{ :style => 'min-width: 640px; width: 80%;' }
+.main
   - form_for [:protected, @group] do |f|
     .ui-widget
       .ui-widget-header.ui-corner-top{ :style => 'padding: 3px 1em; font-weight: normal;' }= t 'actions.protected.groups.new'
@@ -9,4 +9,4 @@
       %a.button{ :href => return_uri }= "#{ icon :cancel }#{ t 'actions.cancel' }"
       %a.submit{ :href => '#' }= "#{ icon :disk }#{ t 'actions.protected.groups.create' }"
 
-.right{ :style => 'padding-left: 2%; width: 18%;' }= @notes
+.notes

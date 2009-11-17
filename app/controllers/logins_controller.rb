@@ -40,7 +40,7 @@ class LoginsController < ApplicationController
   end
 
   def destroy
-    leave and redirect_to root_path
+    leave and redirect_to '/'
   end
 
   protected

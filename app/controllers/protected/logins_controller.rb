@@ -1,46 +1,58 @@
 class Protected::LoginsController < Protected::Base
 
   before_filter :authorized?, :except => [:index, :show]
-  before_filter :assign_searcher, :assign_login, :except => :index
+  before_filter :assign_searcher, :except => :index
+  before_filter :set_title
 
   def index
     @logins, @searcher = Login.search params[:login]
-    set_title 'logins'
   end
-  def show
-    set_title 'logins'
+  def show id = param(:id),
+    login = Login.find(id, :include => {:roles => :group})
+
+    @login = login
   end
-  def new
-    set_title 'logins'
-    render :action => :new
+  def new attributes = param(:login, {}),
+      login = Login.new(attributes)
+
+    @login = login
+    return :new
   end
-  def create
-    if save_login
-      redirect_to return_uri || protected_login_path(@login)
+  def create attributes = param(:login),
+      login = Login.new(attributes)
+
+    if login.save
+      redirect_to return_uri || protected_login_path(login)
     else
-      new
+      render new(attributes, login)
     end
   end
-  def edit
-    set_title 'logins'
-    render :action => :edit
+  def edit id = param(:id),
+      login = Login.find(id)
+
+    @login = login
+    return :edit
   end
-  def update
-    if save_login
-      redirect_to return_uri || protected_login_path(@login)
+  def update id = param(:id), attributes = param(:login),
+      login = Login.find(id).tap { |this| this.attributes = attributes }
+
+    if login.save
+      redirect_to return_uri || protected_login_path(login)
     else
-      edit
+      render edit(id, login)
     end
   end
-  def destroy
-    @login.destroy
+  def destroy id = param(:id),
+      login = Login.find(id)
+
+    login.destroy
     redirect_to return_uri || protected_logins_path
   end
 
   protected
 
-    def save_login
-      @login.save_as_admin params[:administrator]
+    def set_title
+      super 'logins'
     end
 
     def group
