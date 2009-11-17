@@ -26,7 +26,7 @@ class Navigation < XBEL
     end
 
     def write(author, *changes)
-      @path.open('w') { |file| file << @xbel }
+      @path.open('w') { |file| file << self }
 
       message = "#{ author.name } updated #{ @relative_path }.\n"
       message << changes.map { |c| " * #{ c }" }.join("\n")
@@ -58,7 +58,7 @@ class Navigation < XBEL
         :id => path.basename('.xbel'),
         :title => path.basename('.xbel')
     path.open('w') { |file| file << xbel }
-    REPO.add relative_path(path)
+    REPO.add path.relative_path_from(ROOT)
     REPO.commit "Created navigation for #{ locale }."
     retry
   end
